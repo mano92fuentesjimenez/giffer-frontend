@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "services/*": ["./services"]
+      "services/*": ["./services"],
+      "scenes/*": ["./scenes"],
+      "components/*": ["./components"]
     }
   }
 }

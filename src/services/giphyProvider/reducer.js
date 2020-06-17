@@ -1,4 +1,4 @@
-import {GIFS_START_LOADING, SEARCH_TEXT_CHANGED} from "./constants";
+import {GIFS_LOADED, GIFS_START_LOADING, SEARCH_TEXT_CHANGED} from "./constants";
 
 const initialState = {
   searchText: '',
@@ -18,6 +18,12 @@ export default function(state = initialState, action) {
         ...state,
         searching: true,
       };
+    case GIFS_LOADED:
+      return {
+        ...state,
+        gifs: action.payload,
+        searching: false,
+      }
     default:
       return state;
   }

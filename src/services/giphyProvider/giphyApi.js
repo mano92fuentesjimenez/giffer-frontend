@@ -19,7 +19,7 @@ export default function () {
     const { data: { data } } = await req;
     return data.map(gif => ({
         id: gif.id,
-        smallUrl: gif.images.downsized_medium.url ,
+        smallUrl: gif.images.fixed_width_downsampled.url ,
         largeUrl: gif.images.original.webp,
       })
     );
