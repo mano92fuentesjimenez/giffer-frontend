@@ -1,10 +1,14 @@
 import React from 'react';
-import GiphySearcher from "scenes/GiphySearcher/GiphySearcher";
+import { Switch, Route, Redirect } from 'react-router-dom';
+import GiphySearcher,{ PATH as GIF_SEARCHER_PATH } from "scenes/GiphySearcher";
 import './App.css';
 
 function App() {
   return (
-    <GiphySearcher />
+    <Switch>
+      <Route exact path={GIF_SEARCHER_PATH} component={GiphySearcher} />
+      <Route path="*" render={() => <Redirect to={GIF_SEARCHER_PATH} />} />
+    </Switch>
   );
 }
 

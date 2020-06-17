@@ -12,20 +12,20 @@ const GiphySearcher = () => {
   const isSearching = useSelector(selectIsSearching);
   const rowChunks = chunk(gifData, 6);
 
-  return<>
-    <TopBar />
+  return <>
+    <TopBar/>
     {isSearching && gifData.length === 0 &&
     <div className='big-loader-wrapper'>
       <Loader type="Rings" color='blue' height={200} width={200}/>
     </div>}
     {gifData && <div className="container">
       {
-        rowChunks.map( (rowChunk, index) => (
+        rowChunks.map((rowChunk, index) => (
             <div className="row mb-4" key={index}>
-              { rowChunk.map( gif => (
-                <div className="col-md-2"  key={gif.id}>
-                  <Gif gifUrl={gif.smallUrl} />
-                </div>)) }
+              {rowChunk.map(gif => (
+                <div className="col-md-2" key={gif.id}>
+                  <Gif gifUrl={gif.smallUrl}/>
+                </div>))}
             </div>
           )
         )

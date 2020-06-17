@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import { Provider } from 'react-redux';
-import store from "./services/store";
+import store, { history } from "./services/store";
+import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
