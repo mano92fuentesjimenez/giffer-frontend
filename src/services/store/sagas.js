@@ -1,4 +1,4 @@
-import giphyProviderSaga from '../giphyProvider/sagas';
+import giphyProviderSaga from 'services/giphyProvider/sagas';
 
 export default [
   giphyProviderSaga

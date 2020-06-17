@@ -1,4 +1,4 @@
-import giphyProviderReducer from '../giphyProvider/reducer'
+import giphyProviderReducer from 'services/giphyProvider/reducer'
 
 const reducers = {
   giphyProviderReducer,
