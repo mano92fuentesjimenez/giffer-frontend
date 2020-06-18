@@ -1,5 +1,7 @@
-import giphyProviderSaga from 'services/giphyProvider/sagas';
+import giphyProviderSagas from 'services/giphyProvider/sagas';
+import { sagas as gifSearcherSagas } from 'scenes/GifSearcher';
 
 export default [
-  giphyProviderSaga
+  giphyProviderSagas,
+  gifSearcherSagas
 ];

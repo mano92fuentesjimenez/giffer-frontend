@@ -1,10 +1,9 @@
 import {
   GIFS_START_LOADING,
-  SEARCH_TEXT_CHANGED,
-  GIFS_LOADED
+  GIFS_LOADED,
+  SEARCH_GIFS,
 } from "./constants";
 
-
-export const changeSearchText = (text) => ({ type: SEARCH_TEXT_CHANGED, payload: text });
+export const searchGifs = (search) => ({ type: SEARCH_GIFS, payload: search });
 export const startLoadingGifs = () => ({ type: GIFS_START_LOADING });
 export const updateGifs = (data) => ({ type: GIFS_LOADED, payload: data });

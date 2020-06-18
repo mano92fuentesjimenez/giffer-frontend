@@ -4,16 +4,21 @@ import {selectGifData, selectIsSearching} from "services/giphyProvider/selectors
 import { chunk } from 'lodash';
 import Gif from "components/Gif/Gif";
 import Loader from 'react-loader-spinner';
-import './GiphySearcher.css'
 import TopBar from "components/topBar/topBar";
+import { PATH as GIF_SEARCHER_PATH }from '../constants'
+import useSearch from "services/search/useSearch";
+import './GifSearcher.css'
 
-const GiphySearcher = () => {
+const GifSearcher = () => {
   const gifData = useSelector(selectGifData);
   const isSearching = useSelector(selectIsSearching);
+  const [{ query }, changeSearch] = useSearch(GIF_SEARCHER_PATH);
   const rowChunks = chunk(gifData, 6);
 
+  const changeQuery = (newSearchText) => changeSearch({ query: newSearchText })
+
   return <>
-    <TopBar/>
+    <TopBar query={query} changeQuery={changeQuery}/>
     {isSearching && gifData.length === 0 &&
     <div className='big-loader-wrapper'>
       <Loader type="Rings" color='blue' height={200} width={200}/>
@@ -38,4 +43,4 @@ const GiphySearcher = () => {
   </>
 };
 
-export default GiphySearcher;
+export default GifSearcher;
