@@ -15,18 +15,24 @@ export default function () {
     }
   };
 
-  const transmuter = async (req) => {
-    const { data: { data } } = await req;
-    return data.map(gif => ({
+  const transmuter = async (req, text) => {
+    const { data: { data, pagination } } = await req;
+    return {
+      data: data.map(gif => ({
         id: gif.id,
         smallUrl: gif.images.fixed_width_downsampled.url ,
         largeUrl: gif.images.original.webp,
-      })
-    );
+      })),
+      pagination,
+      text
+    };
   };
 
   const searchGifs = (text, offset = 0, limit = 72) => {
-    return transmuter(client.get('gifs/search', getParams({ q: text, offset, limit })));
+    return transmuter(
+      client.get('gifs/search', getParams({ q: text, offset, limit })),
+      text,
+    );
   };
 
   const searchTrendingGifs = (offset = 0, limit = 72) => {

@@ -1,6 +1,6 @@
 import React  from 'react';
-import {useSelector} from "react-redux";
-import {selectGifData, selectIsSearching} from "services/giphyProvider/selectors";
+import { useSelector } from "react-redux";
+import { selectGifData, selectIsSearching } from "services/giphyProvider/selectors";
 import { chunk } from 'lodash';
 import Gif from "components/Gif/Gif";
 import Loader from 'react-loader-spinner';
@@ -8,6 +8,7 @@ import TopBar from "components/topBar/topBar";
 import { PATH as GIF_SEARCHER_PATH }from '../constants'
 import useSearch from "services/search/useSearch";
 import './GifSearcher.css'
+import withInfiniteLoading from "hocs/withInfiniteLoading";
 
 const GifSearcher = () => {
   const gifData = useSelector(selectGifData);
@@ -40,7 +41,8 @@ const GifSearcher = () => {
     <div className='small-loader-wrapper'>
       <Loader type="Rings" color='blue' height={100} width={100}/>
     </div>}
+    {!isSearching && <div className="gif-searcher-bottom-spacing"/>}
   </>
 };
 
-export default GifSearcher;
+export default withInfiniteLoading(GifSearcher);

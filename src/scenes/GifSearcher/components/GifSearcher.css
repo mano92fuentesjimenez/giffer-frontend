@@ -13,3 +13,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.gif-searcher-bottom-spacing {
+  padding-top: 100px;
+}

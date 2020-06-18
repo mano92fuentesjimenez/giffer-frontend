@@ -5,7 +5,8 @@
       "services/*": ["./services"],
       "scenes/*": ["./scenes"],
       "components/*": ["./components"],
-      "helpers/*": ["./helpers"]
+      "helpers/*": ["./helpers"],
+      "hocs/*": ["./hocs"]
     }
   }
 }

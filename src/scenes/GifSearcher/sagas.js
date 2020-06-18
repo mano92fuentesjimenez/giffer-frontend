@@ -1,10 +1,11 @@
 import { takeLatest, select, delay, put } from "redux-saga/effects";
 import { getLocation, LOCATION_CHANGE, push } from 'connected-react-router';
-import { PATH as GIF_SEARCHER_PATH, SEARCH_DELAY } from './constants'
+import { PATH as GIF_SEARCHER_PATH } from './constants'
 import selectSearch from "services/search/selectSearch";
 import { searchGifs, searchTrendingGifs } from "services/giphyProvider/actions";
 import { getStringFromSearch } from "services/search/helpers";
 import { WasTypeTrendingLastPath } from "helpers/routesHelper";
+import { SEARCH_DELAY } from "../../constants";
 
 function* locationChanged(action) {
   yield delay(SEARCH_DELAY);
