@@ -29,7 +29,12 @@ export default function () {
     return transmuter(client.get('gifs/search', getParams({ q: text, offset, limit })));
   };
 
+  const searchTrendingGifs = (offset = 0, limit = 72) => {
+    return transmuter(client.get('gifs/trending', getParams({ offset, limit })));
+  };
+
   return {
     searchGifs,
+    searchTrendingGifs,
   }
 }

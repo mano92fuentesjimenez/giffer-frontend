@@ -1,7 +1,9 @@
 import qs from 'qs';
+import {SEARCH_TYPES} from "./constants";
 
 export const propNames = {
-  QUERY: 'query'
+  QUERY: 'query',
+  TYPE: 'type',
 };
 
 const allowedUrlParams = Object.values(propNames);
@@ -14,12 +16,21 @@ export const removeFalsyValues = props => fromEntries(
     ),
 );
 
+export const validateSearch = (search) => {
+  const validEntries = removeFalsyValues(search)
+
+  if(validEntries.query && validEntries.query !== '')
+    validEntries.type = SEARCH_TYPES.SEARCH;
+
+  return validEntries;
+}
+
 export const getSearchFromString = (str = "?") => {
   const obj = qs.parse(str.slice(1));
-  return removeFalsyValues(obj)
+  return validateSearch(obj)
 }
 
 export const getStringFromSearch = (search = {}) => {
-  const validated = removeFalsyValues(search);
+  const validated = validateSearch(search);
   return qs.stringify(validated)
 }

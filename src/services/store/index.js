@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import sagas from './sagas';
 import giphyApi from "../giphyProvider/giphyApi";
+import locationHistoryMiddleware from "./location-history-middleware";
 
 const configureStore = (history) => {
   const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -12,7 +13,7 @@ const configureStore = (history) => {
 
   const sagaMiddleware = createSagaMiddleware();
   const routingMiddleware = routerMiddleware(history);
-  const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware, routingMiddleware));
+  const enhancer = composeEnhancers(applyMiddleware(locationHistoryMiddleware, sagaMiddleware, routingMiddleware));
   const enhancedReducers = combineReducers({
     ...reducers,
     router: connectRouter(history),
