@@ -1,0 +1,46 @@
+.component-modal {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  background-color: #404040;
+  outline: none;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #404040;
+  }
+
+  &__close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 11px;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+
+    &:after,
+    &:before {
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 2px;
+      height: 10px;
+      background-color: white;
+      content: '';
+    }
+
+    &:after {
+      transform: rotate(45deg);
+    }
+    &:before {
+      transform: rotate(-45deg);
+    }
+  }
+}

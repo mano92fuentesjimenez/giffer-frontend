@@ -8,9 +8,12 @@ import * as serviceWorker from './serviceWorker';
 import { SearchProvider } from './services/search/context';
 import { createBrowserHistory } from "history";
 import configureStore from "./services/store";
+import ReactModal from 'react-modal';
 
 const history = createBrowserHistory();
 const store = configureStore(history);
+
+ReactModal.setAppElement('#root');
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

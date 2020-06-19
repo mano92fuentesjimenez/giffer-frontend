@@ -1,5 +1,6 @@
 import qs from 'qs';
-import {SEARCH_TYPES} from "./constants";
+import { SEARCH_TYPES } from './constants';
+import getSearch from 'helpers/getSearch';
 
 export const propNames = {
   QUERY: 'query',
@@ -26,7 +27,7 @@ export const validateSearch = (search) => {
 }
 
 export const getSearchFromString = (str = "?") => {
-  const obj = qs.parse(str.slice(1));
+  const obj = getSearch(str)
   return validateSearch(obj)
 }
 

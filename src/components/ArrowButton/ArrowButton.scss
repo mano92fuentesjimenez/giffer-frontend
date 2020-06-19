@@ -1,0 +1,15 @@
+.components-arrow-btn {
+  cursor: pointer;
+
+  &_disabled {
+    cursor: auto;
+
+    opacity: 0.5;
+  }
+
+  &_orientation {
+    &_left {
+      transform: rotate(180deg);
+    }
+  }
+}

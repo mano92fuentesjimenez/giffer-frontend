@@ -4,7 +4,7 @@ import { PATH as GIF_SEARCHER_PATH } from './constants'
 import selectSearch from "services/search/selectSearch";
 import { searchGifs, searchTrendingGifs } from "services/giphyProvider/actions";
 import { getStringFromSearch } from "services/search/helpers";
-import { WasTypeTrendingLastPath } from "helpers/routesHelper";
+import { wasTypeTrendingLastPath } from "helpers/routesHelper";
 import { SEARCH_DELAY } from "constants/constants";
 
 function* locationChanged(action) {
@@ -16,7 +16,7 @@ function* locationChanged(action) {
 
   const search = yield select(selectSearch);
   if(search.query) yield put(searchGifs(search));
-  else if(!WasTypeTrendingLastPath(action)) {
+  else if(!wasTypeTrendingLastPath(action)) {
     yield put(searchTrendingGifs());
     yield put(push({ pathname: GIF_SEARCHER_PATH, search: getStringFromSearch({ ...search, type: 'trending' })}));
   }

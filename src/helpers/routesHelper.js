@@ -1,6 +1,6 @@
 import { getSearchFromString } from "services/search/helpers";
 import { SEARCH_TYPES } from "services/search/constants";
 
-export const WasTypeTrendingLastPath = ({ meta: { previousLocation: { search } }}) => {
+export const wasTypeTrendingLastPath = ({ meta: { previousLocation: { search } }}) => {
   return getSearchFromString(search).type === SEARCH_TYPES.TRENDING;
 }

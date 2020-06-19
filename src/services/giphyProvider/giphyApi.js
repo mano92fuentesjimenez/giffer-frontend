@@ -22,7 +22,8 @@ export default function () {
       data: data.map(gif => ({
         id: gif.id,
         smallUrl: gif.images.fixed_width_downsampled.url ,
-        largeUrl: gif.images.original.webp,
+        largeUrl: gif.images.fixed_width_downsampled.url,
+        // largeUrl: gif.images.original.webp,
       })),
       pagination,
       text

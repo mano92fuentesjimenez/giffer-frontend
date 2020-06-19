@@ -1,0 +1,31 @@
+
+.scene-gif-viewer {
+
+  &__main-gif-container {
+    margin: auto;
+    width: 500px;
+  }
+
+  &__carousel-holder {
+    display: flex;
+    align-items: center;
+    margin-top: 150px;
+  }
+
+  &__carousel-container {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__carousel {
+    display: flex;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+  }
+
+  &__gif-container {
+    padding: 15px 10px;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+}
