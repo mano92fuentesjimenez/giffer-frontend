@@ -80,8 +80,10 @@ const CarouselViewer = ({ location: { search }}) => {
                   <Gif
                     gifUrl={gif.smallUrl}
                     onClick={() =>onGifSelected(index)}
-                    selected={index === selectedGif}
+                    selected={index === selectedGifPosition}
                   />
+                  {selectedGifPosition}
+                  {index}
                 </div>
               )}
             </div>
