@@ -5,12 +5,14 @@ import { PATH } from 'scenes/GifSearcher';
 import { getStringFromSearch } from 'services/search/helpers';
 import Modal from 'components/Modal/Modal';
 import getSearch from 'helpers/getSearch';
-import { selectGifData } from 'services/giphyProvider/selectors';
+import { selectGifData, selectIsSearching } from 'services/giphyProvider/selectors';
 import bem from 'bem-cn';
 import Gif from 'components/Gif/Gif';
 import ArrowButton from 'components/ArrowButton/ArrowButton';
-import './CarouselViewer.scss'
 import GifMetadata from 'components/GifMetadata/GifMetadata';
+import { loadMore } from 'services/giphyProvider/actions';
+import Loader from 'react-loader-spinner';
+import './CarouselViewer.scss'
 
 const b = bem('scene-gif-viewer');
 
@@ -19,6 +21,7 @@ const CarouselViewer = ({ location: { search }}) => {
 
   const dispatch = useDispatch();
   const gifs = useSelector(selectGifData);
+  const isLoading = useSelector(selectIsSearching);
   const searchObj = getSearch(search);
   const [selectedGifPosition, setSelectedGifPosition] = useState(+searchObj.position);
   const containerRef = useRef(null);
@@ -42,7 +45,12 @@ const CarouselViewer = ({ location: { search }}) => {
   const onRequestClose = () => dispatch(push({ pathname: PATH, search: getStringFromSearch(search)}))
   const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
-  const onGoToNextGifs = () => setFirstGif(Math.min(firstGif + gifsToShow, gifs.length - 1));
+  const onGoToNextGifs = () => {
+    if(firstGif + gifsToShow > gifs.length - 1)
+      return dispatch(loadMore());
+
+    setFirstGif(Math.min(firstGif + gifsToShow, gifs.length - gifsToShow));
+  }
 
   const selectedGif = gifs[selectedGifPosition];
   return (
@@ -87,9 +95,15 @@ const CarouselViewer = ({ location: { search }}) => {
             </div>
           </div>
           <ArrowButton
-            disabled={firstGif === gifs.length - 1}
+            className={isLoading ? 'invisible' : ''}
             onClick={onGoToNextGifs}
           />
+          {
+            isLoading &&
+            <div className={b('loader-container')()}>
+              <Loader type="Rings" color='blue' height={80} width={80}/>
+            </div>
+          }
         </div>
       </div>
     </Modal>

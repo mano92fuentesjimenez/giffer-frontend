@@ -38,4 +38,9 @@
     flex-shrink: 0;
     flex-grow: 0;
   }
+
+  &__loader-container {
+    position: absolute;
+    right: -48px;
+  }
 }
