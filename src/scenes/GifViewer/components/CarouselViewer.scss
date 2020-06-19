@@ -2,14 +2,14 @@
 .scene-gif-viewer {
 
   &__main-gif-container {
-    margin: auto;
+    margin: 30px auto;
     width: 500px;
   }
 
   &__carousel-holder {
     display: flex;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 120px;
   }
 
   &__carousel-container {

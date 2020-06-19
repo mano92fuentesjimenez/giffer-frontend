@@ -33,6 +33,7 @@ const CarouselViewer = ({ location: { search }}) => {
 
   useEffect(() => {
     window.addEventListener('resize', calculateGifWidth);
+    setFirstGif(Math.max(selectedGif - gifsToShow / 2 - 1, firstGif));
     return () => window.removeEventListener('resize', calculateGifWidth);
     // eslint-disable-next-line
   }, [])
