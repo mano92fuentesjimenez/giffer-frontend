@@ -23,6 +23,8 @@ export default function(state = initialState, { type, payload }) {
         searching: true,
       };
     case GIFS_LOADED:
+      if(payload.timestamp && state.searchInfo.timestamp > payload.timestamp)
+        return state;
       return {
         ...state,
         gifs: [
@@ -33,6 +35,7 @@ export default function(state = initialState, { type, payload }) {
         searchInfo: {
           text: payload.text,
           pagination: payload.pagination,
+          timestamp: payload.timestamp,
         }
       }
     default:

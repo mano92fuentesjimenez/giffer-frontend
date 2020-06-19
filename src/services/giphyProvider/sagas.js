@@ -11,14 +11,24 @@ function* startSearching() {
 
 function* searchGifs({ searchGifs }, { payload: { query }}) {
   yield call(startSearching);
+  const timestamp = Date.now();
   const data = yield call(searchGifs, query);
-  yield put(updateGifs(data));
+
+  yield put(updateGifs({
+    ...data,
+    timestamp,
+  }));
 }
 
 function* searchTrendingGifs({ searchTrendingGifs }) {
   yield call(startSearching);
+  const timestamp = Date.now();
   const data = yield call(searchTrendingGifs);
-  yield put(updateGifs(data));
+
+  yield put(updateGifs({
+    ...data,
+    timestamp,
+  }));
 }
 
 function* loadMore({ searchTrendingGifs, searchGifs }) {
