@@ -37,10 +37,10 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   if(isSearching) return;
 
   yield call(startSearching);
-  const { text, pagination } = yield select(selectSearchInfo);
+  const { query, pagination } = yield select(selectSearchInfo);
 
   let data;
-  if (text) data = yield call(searchGifs, text, pagination.offset + pagination.count);
+  if (query) data = yield call(searchGifs, query, pagination.offset + pagination.count);
   else data = yield call(searchTrendingGifs,pagination.offset + pagination.count);
 
   yield put(updateGifs(data));

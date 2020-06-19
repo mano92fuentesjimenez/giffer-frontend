@@ -42,7 +42,7 @@ const CarouselViewer = ({ location: { search }}) => {
     // eslint-disable-next-line
   }, [])
 
-  const onRequestClose = () => dispatch(push({ pathname: PATH, search: getStringFromSearch(search)}))
+  const onRequestClose = () => dispatch(push({ pathname: PATH, search: getStringFromSearch(searchObj)}))
   const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
   const onGoToNextGifs = () => {

@@ -24,7 +24,7 @@ const GifSearcher = () => {
 
   const changeQuery = (newSearchText) => changeSearch({ query: newSearchText })
   const onGifClick = (position) => () => dispatch(
-    push({ pathname: GIF_VIEWER_PATH, search: qs.stringify({ position }) })
+    push({ pathname: GIF_VIEWER_PATH, search: qs.stringify({ position, ...search }) })
   );
 
   return <>

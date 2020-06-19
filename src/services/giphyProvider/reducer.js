@@ -33,7 +33,7 @@ export default function(state = initialState, { type, payload }) {
         ],
         searching: false,
         searchInfo: {
-          text: payload.text,
+          query: payload.text,
           pagination: payload.pagination,
           timestamp: payload.timestamp,
         }

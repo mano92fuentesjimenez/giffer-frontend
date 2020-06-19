@@ -6,7 +6,7 @@ import { searchGifs, searchTrendingGifs } from 'services/giphyProvider/actions';
 import { getStringFromSearch } from 'services/search/helpers';
 import { SEARCH_DELAY } from 'constants/constants';
 import { selectIsSearching, selectSearchInfo } from 'services/giphyProvider/selectors';
-import { wasTypeTrendingLastPath } from 'helpers/routesHelper';
+import { wasLastRouteTheSame, wasTypeTrendingLastPath } from 'helpers/routesHelper';
 
 function* locationChanged(action) {
   yield delay(SEARCH_DELAY);
@@ -17,6 +17,10 @@ function* locationChanged(action) {
 
   const search = yield select(selectSearch);
   const isLoading = yield select(selectIsSearching)
+  const lastSearchInfo = yield select(selectSearchInfo);
+
+  if(!wasLastRouteTheSame(action, GIF_SEARCHER_PATH) && lastSearchInfo.query == search.query)
+    return;
 
   if(search.query) yield put(searchGifs(search));
   else if(!wasTypeTrendingLastPath(action) || !isLoading) {
