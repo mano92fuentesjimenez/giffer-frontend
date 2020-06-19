@@ -28,8 +28,7 @@ const CarouselViewer = ({ location: { search }}) => {
     if(!containerRef.current)
       return;
     const { width } = containerRef.current.getBoundingClientRect();
-    console.log(width);
-    setGifWidth( (width - 16)/gifsToShow);
+    setGifWidth( (width - 28)/gifsToShow);
   }
 
   useEffect(() => {
