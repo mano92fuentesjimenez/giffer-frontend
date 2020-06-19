@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import sagas from './sagas';
 import giphyApi from "../giphyProvider/giphyApi";
-import locationHistoryMiddleware from "./location-history-middleware";
+import locationHistoryMiddleware from "./middlewares/location-history-middleware";
 
 const configureStore = (history) => {
   const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
