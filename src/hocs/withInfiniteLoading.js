@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { debounce } from 'lodash';
 import { useDispatch } from "react-redux";
 import { loadMore } from "services/giphyProvider/actions";
-import { SEARCH_DELAY } from "../constants";
+import { SEARCH_DELAY } from "constants/constants";
 
 const withInfiniteLoading = (Component) =>
   (props) => {

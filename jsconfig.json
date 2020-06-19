@@ -6,7 +6,8 @@
       "scenes/*": ["./scenes"],
       "components/*": ["./components"],
       "helpers/*": ["./helpers"],
-      "hocs/*": ["./hocs"]
+      "hocs/*": ["./hocs"],
+      "constants/*":  ["./constants"]
     }
   }
 }

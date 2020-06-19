@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PAGINATION_LIMIT } from "constants/constants";
 
 export default function () {
   const client = axios.create({
@@ -28,14 +29,14 @@ export default function () {
     };
   };
 
-  const searchGifs = (text, offset = 0, limit = 72) => {
+  const searchGifs = (text, offset = 0, limit = PAGINATION_LIMIT) => {
     return transmuter(
       client.get('gifs/search', getParams({ q: text, offset, limit })),
       text,
     );
   };
 
-  const searchTrendingGifs = (offset = 0, limit = 72) => {
+  const searchTrendingGifs = (offset = 0, limit = PAGINATION_LIMIT) => {
     return transmuter(client.get('gifs/trending', getParams({ offset, limit })));
   };
 

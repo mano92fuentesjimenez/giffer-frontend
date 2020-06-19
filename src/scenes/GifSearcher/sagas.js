@@ -5,7 +5,7 @@ import selectSearch from "services/search/selectSearch";
 import { searchGifs, searchTrendingGifs } from "services/giphyProvider/actions";
 import { getStringFromSearch } from "services/search/helpers";
 import { WasTypeTrendingLastPath } from "helpers/routesHelper";
-import { SEARCH_DELAY } from "../../constants";
+import { SEARCH_DELAY } from "constants/constants";
 
 function* locationChanged(action) {
   yield delay(SEARCH_DELAY);

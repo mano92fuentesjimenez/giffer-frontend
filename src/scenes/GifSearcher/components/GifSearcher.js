@@ -5,7 +5,7 @@ import { chunk } from 'lodash';
 import Gif from "components/Gif/Gif";
 import Loader from 'react-loader-spinner';
 import TopBar from "components/topBar/topBar";
-import { PATH as GIF_SEARCHER_PATH }from '../constants'
+import { PATH as GIF_SEARCHER_PATH } from '../constants'
 import useSearch from "services/search/useSearch";
 import './GifSearcher.css'
 import withInfiniteLoading from "hocs/withInfiniteLoading";
