@@ -1,0 +1,24 @@
+.components-rating {
+
+  &_rating {
+
+    &_r {
+      width: 31px;
+    }
+    &_pg {
+      width: 50px;
+    }
+
+    &_pg-13 {
+      width: 95px;
+    }
+
+    &_g {
+     width: 30px;
+    }
+  }
+
+  & img {
+    width: 100%;
+  }
+}

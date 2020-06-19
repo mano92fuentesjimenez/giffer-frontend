@@ -1,0 +1,14 @@
+.components-gif-metadata {
+  display: block;
+
+  &__row {
+    display: flex;
+  }
+
+  &__field {
+    width: 150px;
+    flex-shrink: 0;
+  }
+
+
+}

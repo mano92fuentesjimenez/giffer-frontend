@@ -23,6 +23,13 @@ export default function () {
         id: gif.id,
         smallUrl: gif.images.fixed_width_downsampled.url ,
         largeUrl: gif.images.fixed_width_downsampled.url,
+        metaData: {
+          title: gif.title,
+          creationTime: gif.create_datetime,
+          trendingTime: gif.trending_datetime,
+          userName: gif.username,
+          rating: gif.rating,
+        }
         // largeUrl: gif.images.original.webp,
       })),
       pagination,

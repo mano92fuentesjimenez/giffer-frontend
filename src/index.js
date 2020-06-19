@@ -5,8 +5,9 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
-import { SearchProvider } from './services/search/context';
+import { SearchProvider } from 'services/search/context';
 import { createBrowserHistory } from "history";
+import { IntlProvider } from 'react-intl';
 import configureStore from "./services/store";
 import ReactModal from 'react-modal';
 
@@ -21,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <SearchProvider>
-            <App />
+            <IntlProvider locale="en">
+              <App />
+            </IntlProvider>
           </SearchProvider>
         </ConnectedRouter>
       </Provider>

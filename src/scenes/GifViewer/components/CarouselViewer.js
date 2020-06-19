@@ -10,6 +10,7 @@ import bem from 'bem-cn';
 import Gif from 'components/Gif/Gif';
 import ArrowButton from 'components/ArrowButton/ArrowButton';
 import './CarouselViewer.scss'
+import GifMetadata from 'components/GifMetadata/GifMetadata';
 
 const b = bem('scene-gif-viewer');
 
@@ -19,7 +20,7 @@ const CarouselViewer = ({ location: { search }}) => {
   const dispatch = useDispatch();
   const gifs = useSelector(selectGifData);
   const searchObj = getSearch(search);
-  const [selectedGif, setSelectedGif] = useState(+searchObj.position);
+  const [selectedGifPosition, setSelectedGifPosition] = useState(+searchObj.position);
   const containerRef = useRef(null);
   const [gifWidth, setGifWidth] = useState(0);
   const [firstGif, setFirstGif] = useState(0);
@@ -33,16 +34,17 @@ const CarouselViewer = ({ location: { search }}) => {
 
   useEffect(() => {
     window.addEventListener('resize', calculateGifWidth);
-    setFirstGif(Math.max(selectedGif - gifsToShow / 2 - 1, firstGif));
+    setFirstGif(Math.max(selectedGifPosition - gifsToShow / 2 - 1, firstGif));
     return () => window.removeEventListener('resize', calculateGifWidth);
     // eslint-disable-next-line
   }, [])
 
   const onRequestClose = () => dispatch(push({ pathname: PATH, search: getStringFromSearch(search)}))
-  const onGifSelected = (gifPosition) => setSelectedGif(gifPosition);
+  const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
   const onGoToNextGifs = () => setFirstGif(Math.min(firstGif + gifsToShow, gifs.length - 1));
 
+  const selectedGif = gifs[selectedGifPosition];
   return (
     <Modal
       isOpen={true}
@@ -50,8 +52,13 @@ const CarouselViewer = ({ location: { search }}) => {
       onAfterOpen={calculateGifWidth}
     >
       <div className={b()} ref={containerRef}>
-        <div className={b('main-gif-container')()}>
-          <Gif gifUrl={gifs[selectedGif].largeUrl}/>
+        <div className={b('main-container')()}>
+          <div className={b('main-gif-container')()}>
+            <Gif gifUrl={selectedGif.largeUrl}/>
+          </div>
+          <div className={b('metadata-container')()}>
+            <GifMetadata gif={selectedGif}/>
+          </div>
         </div>
         <div className={b('carousel-holder')()}>
           <ArrowButton

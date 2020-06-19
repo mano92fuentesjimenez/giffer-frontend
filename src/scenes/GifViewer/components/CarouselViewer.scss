@@ -1,9 +1,19 @@
 
 .scene-gif-viewer {
 
-  &__main-gif-container {
+  &__main-container {
     margin: 30px auto;
+    width: 900px;
+    display: flex;
+  }
+
+  &__main-gif-container {
     width: 500px;
+  }
+
+  &__metadata-container {
+    padding-left: 25px;
+    margin-top: 20px;
   }
 
   &__carousel-holder {
