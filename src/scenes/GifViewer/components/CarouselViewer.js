@@ -82,8 +82,6 @@ const CarouselViewer = ({ location: { search }}) => {
                     onClick={() =>onGifSelected(index)}
                     selected={index === selectedGifPosition}
                   />
-                  {selectedGifPosition}
-                  {index}
                 </div>
               )}
             </div>

@@ -1,5 +1,5 @@
 export const SEARCH_DELAY = 200;
-export const PAGINATION_LIMIT = 72;
+export const PAGINATION_LIMIT = 36;
 
 export const RATINGS = {
   pg: 'PG',

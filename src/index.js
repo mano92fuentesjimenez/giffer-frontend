@@ -7,9 +7,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 import { SearchProvider } from 'services/search/context';
 import { createBrowserHistory } from "history";
-import { IntlProvider } from 'react-intl';
 import configureStore from "./services/store";
 import ReactModal from 'react-modal';
+import IntlProvider from 'services/intlProvider/IntlProvider';
 
 const history = createBrowserHistory();
 const store = configureStore(history);
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <SearchProvider>
-            <IntlProvider locale="en">
+            <IntlProvider>
               <App />
             </IntlProvider>
           </SearchProvider>
