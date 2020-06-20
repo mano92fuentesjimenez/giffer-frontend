@@ -1,9 +1,10 @@
 .component-modal {
   position: absolute;
-  top: 60px;
-  left: 60px;
-  right: 60px;
-  bottom: 60px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #d0d0d0;
   outline: none;
 

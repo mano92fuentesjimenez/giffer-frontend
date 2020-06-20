@@ -12,6 +12,7 @@ import ArrowButton from 'components/ArrowButton/ArrowButton';
 import GifMetadata from 'components/GifMetadata/GifMetadata';
 import { loadMore } from 'services/giphyProvider/actions';
 import Loader from 'react-loader-spinner';
+import CloseBtn from 'components/CloseBtn/CloseBtn';
 import './CarouselViewer.scss'
 
 const b = bem('scene-gif-viewer');
@@ -60,6 +61,7 @@ const CarouselViewer = ({ location: { search }}) => {
       onAfterOpen={calculateGifWidth}
     >
       <div className={b()} ref={containerRef}>
+        <CloseBtn className={b('close-btn')()} onClick={onRequestClose} />
         <div className={b('main-container')()}>
           <div className={b('main-gif-container')()}>
             <Gif gifUrl={selectedGif.largeUrl}/>

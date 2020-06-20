@@ -1,5 +1,8 @@
 
 .scene-gif-viewer {
+  max-width: 1800px;
+  width: 100%;
+  position: relative;
 
   &__main-container {
     margin: 30px auto;
@@ -42,5 +45,10 @@
   &__loader-container {
     position: absolute;
     right: -48px;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 10px;
   }
 }
