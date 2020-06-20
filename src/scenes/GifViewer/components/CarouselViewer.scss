@@ -8,9 +8,9 @@
 
 
   &__main-container {
-    margin: 30px;
+    margin: 64px 0;
     width: 900px;
-    height: 480px;
+    height: 500px;
     display: flex;
     transform: translate(51%);
   }
@@ -27,7 +27,7 @@
   &__carousel-holder {
     display: flex;
     align-items: center;
-    margin: 0 20px 15px;
+    margin: 0 20px 28px;
   }
 
   &__carousel-container {
