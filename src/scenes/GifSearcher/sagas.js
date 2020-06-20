@@ -23,7 +23,7 @@ function* locationChanged(action) {
   !wasLastRouteTheSame(action, GIFS_PATH)
     // eslint-disable-next-line
     && lastSearchInfo.query == search.query
-    && lastSearchInfo.query
+    && lastSearchInfo.pagination
   )
     return;
   if(search.query) yield put(searchGifs(search));
