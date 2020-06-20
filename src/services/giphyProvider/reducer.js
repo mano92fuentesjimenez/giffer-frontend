@@ -1,4 +1,4 @@
-import {GIFS_LOADED, GIFS_START_LOADING, SEARCH_GIFS, SEARCH_TRENDING_GIFS} from "./constants";
+import { GIFS_LOADED, GIFS_START_LOADING, SEARCH_GIFS, SEARCH_TRENDING_GIFS, STOP_SEARCH } from './constants';
 
 const initialState = {
   gifs: [],
@@ -38,6 +38,8 @@ export default function(state = initialState, { type, payload }) {
           timestamp: payload.timestamp,
         }
       }
+    case STOP_SEARCH:
+      return initialState;
     default:
       return state;
   }

@@ -8,6 +8,7 @@ export default
       trendingTime: 'Fecha de tendencia',
       error: 'Error',
       info: 'Información',
+      networkError: 'Hay problemas de conexión',
     },
     en: {
       tittle: 'Title',
@@ -17,5 +18,6 @@ export default
       trendingTime: 'Trending Time',
       error: 'Error',
       info: 'Info',
+      networkError: 'There are connection problems',
     }
   };

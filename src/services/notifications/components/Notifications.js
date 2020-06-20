@@ -4,7 +4,7 @@ import './Notifications.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectIsNotificationOpen,
-  selectNotificationText,
+  selectNotificationTextId,
   selectNotificationType
 } from 'services/notifications/selectors';
 import { FormattedMessage } from 'react-intl';
@@ -21,7 +21,7 @@ const b = bem('services-notification');
 const Notifications = () => {
 
   const dispatch = useDispatch();
-  const text = useSelector(selectNotificationText);
+  const textId = useSelector(selectNotificationTextId);
   const type = useSelector(selectNotificationType);
   const isOpen = useSelector(selectIsNotificationOpen);
 
@@ -39,7 +39,9 @@ const Notifications = () => {
             </>
         }
       </div>
-      <div className={b('content')()}>{text}</div>
+      <div className={b('content')()}>
+        {textId && <FormattedMessage id={textId}/>}
+      </div>
     </div>
   )
 

@@ -1,7 +1,9 @@
 import { call, put, takeEvery, delay, select } from 'redux-saga/effects'
 import { LOAD_MORE, SEARCH_GIFS, SEARCH_TRENDING_GIFS, SEARCHING_DELAY } from './constants';
-import { startLoadingGifs, updateGifs} from './actions';
+import { startLoadingGifs, stopSearch, updateGifs } from './actions';
 import {selectIsSearching, selectSearchInfo} from './selectors';
+import { showNotifications } from 'services/notifications/actions';
+import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 
 function* startSearching() {
   yield put(startLoadingGifs());
@@ -11,24 +13,40 @@ function* startSearching() {
 
 function* searchGifs({ searchGifs }, { payload: { query }}) {
   yield call(startSearching);
-  const timestamp = Date.now();
-  const data = yield call(searchGifs, query);
+  try {
+    const timestamp = Date.now();
+    const data = yield call(searchGifs, query);
 
-  yield put(updateGifs({
-    ...data,
-    timestamp,
-  }));
+    yield put(updateGifs({
+      ...data,
+      timestamp,
+    }));
+  } catch (e) {
+    yield put(stopSearch())
+    yield put(showNotifications({
+      type: NOTIFICATION_TYPES.ERROR,
+      textId: 'networkError',
+    }))
+  }
 }
 
 function* searchTrendingGifs({ searchTrendingGifs }) {
   yield call(startSearching);
-  const timestamp = Date.now();
-  const data = yield call(searchTrendingGifs);
+  try {
+    const timestamp = Date.now();
+    const data = yield call(searchTrendingGifs);
 
-  yield put(updateGifs({
-    ...data,
-    timestamp,
-  }));
+    yield put(updateGifs({
+      ...data,
+      timestamp,
+    }));
+  } catch (e) {
+    yield put(stopSearch())
+    yield put(showNotifications({
+      type: NOTIFICATION_TYPES.ERROR,
+      textId: 'networkError',
+    }))
+  }
 }
 
 function* loadMore({ searchTrendingGifs, searchGifs }) {

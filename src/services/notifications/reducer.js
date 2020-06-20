@@ -3,7 +3,7 @@ import { CLOSE_NOTIFICATIONS, OPEN_NOTIFICATIONS } from './constants';
 const initialState = {
   isOpen: false,
   type: null,
-  text: null,
+  textId: null,
 };
 
 export default function(state = initialState, { type, payload }) {
@@ -12,14 +12,14 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         isOpen: true,
-        text: payload.text,
+        textId: payload.textId,
         type: payload.type,
       };
     case CLOSE_NOTIFICATIONS:
       return  {
         ...state,
         isOpen: false,
-        text: null,
+        textId: null,
         type: null,
       }
     default:
