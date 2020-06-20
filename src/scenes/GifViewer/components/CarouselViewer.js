@@ -1,7 +1,5 @@
 import React,{ useState, useEffect, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { PATH } from 'scenes/GifSearcher';
-import { getStringFromSearch } from 'services/search/helpers';
 import getSearch from 'helpers/getSearch';
 import { selectGifData, selectIsSearching } from 'services/giphyProvider/selectors';
 import bem from 'bem-cn';
@@ -10,8 +8,6 @@ import ArrowButton from 'components/ArrowButton/ArrowButton';
 import GifMetadata from 'components/GifMetadata/GifMetadata';
 import { loadMore } from 'services/giphyProvider/actions';
 import Loader from 'react-loader-spinner';
-import CloseBtn from 'components/CloseBtn/CloseBtn';
-import { closeModal } from 'services/modal-service/actions';
 import './CarouselViewer.scss'
 
 const b = bem('scene-gif-viewer');
@@ -32,7 +28,7 @@ const CarouselViewer = ({ location: { search }}) => {
     if (!containerRef.current)
       return;
     const {width} = containerRef.current.getBoundingClientRect();
-    setGifWidth((width - 28) / gifsToShow);
+    setGifWidth((width - 68) / gifsToShow);
   }
 
   useEffect(() => {
@@ -44,7 +40,6 @@ const CarouselViewer = ({ location: { search }}) => {
     // eslint-disable-next-line
   }, [])
 
-  const onRequestClose = () => dispatch(closeModal({pathname: PATH, search: getStringFromSearch(searchObj)}));
   const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
   const onGoToNextGifs = () => {
@@ -57,7 +52,6 @@ const CarouselViewer = ({ location: { search }}) => {
   const selectedGif = gifs[selectedGifPosition];
   return (
     <div className={b()} ref={containerRef}>
-      <CloseBtn className={b('close-btn')()} onClick={onRequestClose}/>
       <div className={b('main-container')()}>
         <div className={b('main-gif-container')()}>
           <Gif gifUrl={selectedGif.largeUrl}/>

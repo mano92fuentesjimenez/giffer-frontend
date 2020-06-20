@@ -1,14 +1,18 @@
 
 .scene-gif-viewer {
-  max-width: 1800px;
-  width: 100%;
-  position: relative;
+
+  @media (min-width: 1650px)  {
+    width: 1600px;
+    position: relative;
+  }
+
 
   &__main-container {
-    margin: 30px auto;
+    margin: 30px;
     width: 900px;
-    height: 550px;
+    height: 480px;
     display: flex;
+    transform: translate(51%);
   }
 
   &__main-gif-container {
@@ -23,6 +27,7 @@
   &__carousel-holder {
     display: flex;
     align-items: center;
+    margin: 0 20px 15px;
   }
 
   &__carousel-container {

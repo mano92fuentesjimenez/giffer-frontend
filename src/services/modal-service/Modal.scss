@@ -1,13 +1,4 @@
 .component-modal {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #d0d0d0d6;
-  outline: none;
-
   &__overlay {
     position: fixed;
     top: 0;
@@ -21,5 +12,14 @@
     position: absolute;
     top: 11px;
     right: 14px;
+  }
+
+  &__content-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eae5e5;
+    box-shadow: 0 1px 5px 6px #b5b5b5;
   }
 }
