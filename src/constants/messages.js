@@ -9,6 +9,8 @@ export default
       error: 'Error',
       info: 'Información',
       networkError: 'Hay problemas de conexión',
+      login: 'Iniciar sessión',
+      signup: 'Crear perfil',
     },
     en: {
       tittle: 'Title',
@@ -19,5 +21,7 @@ export default
       error: 'Error',
       info: 'Info',
       networkError: 'There are connection problems',
+      login: 'Log in',
+      signup: 'Sign up',
     }
   };

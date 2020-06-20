@@ -14,7 +14,6 @@ const ModalService = ({ children }) => {
   const dispatch = useDispatch();
   const { pathname } = useSelector(getLocation);
   const showModal = modalPaths.includes(pathname);
-  modalPaths.forEach(v => console.log(v))
 
   if(showModal){
     // hack to not scroll background page

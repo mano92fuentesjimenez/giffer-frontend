@@ -1,0 +1,1 @@
+export const PATH = '/gifs/sign-up';
