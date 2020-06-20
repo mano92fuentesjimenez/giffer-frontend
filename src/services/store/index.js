@@ -3,7 +3,7 @@ import {connectRouter, routerMiddleware} from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import sagas from './sagas';
-import giphyApi from "../giphyProvider/giphyApi";
+import api from "../../api";
 import locationHistoryMiddleware from "./middlewares/location-history-middleware";
 
 const configureStore = (history) => {
@@ -21,7 +21,7 @@ const configureStore = (history) => {
   const store = createStore(enhancedReducers, enhancer);
   sagas.forEach(saga => {
     sagaMiddleware.run(saga, {
-      giphyApi: giphyApi(),
+      api: api(),
     })
   });
   return store;

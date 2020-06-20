@@ -64,8 +64,8 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   yield put(updateGifs(data));
 }
 
-export default function* ({ giphyApi }) {
-  yield takeEvery(SEARCH_GIFS, searchGifs, giphyApi);
-  yield takeEvery(SEARCH_TRENDING_GIFS, searchTrendingGifs, giphyApi);
-  yield takeEvery(LOAD_MORE, loadMore, giphyApi );
+export default function* ({ api }) {
+  yield takeEvery(SEARCH_GIFS, searchGifs, api);
+  yield takeEvery(SEARCH_TRENDING_GIFS, searchTrendingGifs, api);
+  yield takeEvery(LOAD_MORE, loadMore, api );
 };

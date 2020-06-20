@@ -3,7 +3,7 @@ import { PAGINATION_LIMIT } from "constants/constants";
 
 export default function () {
   const client = axios.create({
-    baseURL: `https://api.giphy.com/v1`,
+    baseURL: `http://localhost:8000`,
     headers: { 'Content-Type': 'application/json' },
   });
 
@@ -11,7 +11,6 @@ export default function () {
     return {
         params: {
           ...params,
-          api_key: 'y3k0H5r7SQWkLWyJs9Z7JfH0xcv3Yafq',
       }
     }
   };
