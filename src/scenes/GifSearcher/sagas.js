@@ -20,9 +20,12 @@ function* locationChanged(action) {
   const lastSearchInfo = yield select(selectSearchInfo);
 
   // eslint-disable-next-line
-  if(!wasLastRouteTheSame(action, GIF_SEARCHER_PATH) && lastSearchInfo.query == search.query)
+  if(
+    !wasLastRouteTheSame(action, GIF_SEARCHER_PATH)
+    && lastSearchInfo.query == search.query
+    && lastSearchInfo.query
+  )
     return;
-
   if(search.query) yield put(searchGifs(search));
   else if(!wasTypeTrendingLastPath(action) || !isLoading) {
     yield put(searchTrendingGifs());
