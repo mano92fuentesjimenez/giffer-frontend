@@ -2,6 +2,7 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import bem from 'bem-cn';
 import './Modal.scss';
+import CloseBtn from 'components/CloseBtn/CloseBtn';
 
 const b = bem('component-modal');
 const Modal = ({
@@ -17,7 +18,7 @@ const Modal = ({
     overlayClassName={b('overlay')()}
     onAfterOpen={onAfterOpen}
   >
-    <div
+    <CloseBtn
       className={b('close-btn')()}
       onClick={onRequestClose}
     />

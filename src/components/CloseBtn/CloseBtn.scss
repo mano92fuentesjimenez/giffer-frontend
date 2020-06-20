@@ -1,0 +1,24 @@
+.components-close-btn {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:after,
+  &:before {
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 3px;
+    height: 15px;
+    background-color: black;
+    content: '';
+  }
+
+  &:after {
+    transform: rotate(45deg);
+  }
+  &:before {
+    transform: rotate(-45deg);
+  }
+}

@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 
 const GifViewer = ({ hadSearched, ...props }) => {
 
-  console.log(hadSearched);
   if(!hadSearched) {
     return <Redirect to={GIF_SEARCHER_PATH} />
   }

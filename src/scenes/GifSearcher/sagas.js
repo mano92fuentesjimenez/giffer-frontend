@@ -19,6 +19,7 @@ function* locationChanged(action) {
   const isLoading = yield select(selectIsSearching)
   const lastSearchInfo = yield select(selectSearchInfo);
 
+  // eslint-disable-next-line
   if(!wasLastRouteTheSame(action, GIF_SEARCHER_PATH) && lastSearchInfo.query == search.query)
     return;
 

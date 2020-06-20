@@ -1,0 +1,58 @@
+.services-notification {
+
+  position: absolute;
+  margin: auto;
+  width: 200px;
+  transform: translate(-50%);
+  background: white;
+  left: 50%;
+  top: -200px;
+  z-index: 999;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+  box-shadow: 0 0 9px 3px #a5a5a5;
+  border-radius: 7px;
+
+  &_isOpen {
+    top: 20px;
+  }
+
+  &__top-bar {
+    padding: 5px 10px;
+    background: #c3c3c3;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 8px;
+    }
+
+    &_type {
+      &_error {
+        color: #c26060;
+      };
+
+      &_info {
+        color: #1d4b78;
+      }
+    }
+  }
+
+  &__icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  &__content {
+    padding: 5px 10px;
+  }
+}

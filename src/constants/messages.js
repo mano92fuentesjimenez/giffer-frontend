@@ -6,6 +6,8 @@ export default
       rating: 'Clasificación',
       creationTime: 'Fecha de creación',
       trendingTime: 'Fecha de tendencia',
+      error: 'Error',
+      info: 'Información',
     },
     en: {
       tittle: 'Title',
@@ -13,5 +15,7 @@ export default
       rating: 'Rating',
       creationTime: 'Creation Time',
       trendingTime: 'Trending Time',
+      error: 'Error',
+      info: 'Info',
     }
   };
