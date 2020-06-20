@@ -4,7 +4,7 @@ import { closeNotifications } from 'services/notifications/actions';
 
 function* openNotifications() {
   yield delay(NOTIFICATION_TIME);
-  // yield put(closeNotifications());
+  yield put(closeNotifications());
 }
 
 export default function* ({ giphyApi }) {
