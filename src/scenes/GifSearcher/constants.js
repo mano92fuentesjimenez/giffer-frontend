@@ -1,1 +1,1 @@
-export const PATH = '/gif-search'
+export const PATH = '/gifs'

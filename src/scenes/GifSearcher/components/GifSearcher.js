@@ -7,8 +7,8 @@ import { chunk } from 'lodash';
 import Gif from "components/Gif/Gif";
 import Loader from 'react-loader-spinner';
 import TopBar from "components/topBar/topBar";
-import { PATH as GIF_SEARCHER_PATH } from '../constants'
-import { PATH as GIF_VIEWER_PATH } from 'scenes/GifViewer/constants'
+import { PATH as GIFS_PATH } from '../constants'
+import { PATH as GIFS_VIEW_PATH } from 'scenes/GifViewer/constants'
 import useSearch from "services/search/useSearch";
 import withInfiniteLoading from "hocs/withInfiniteLoading";
 import './GifSearcher.css'
@@ -18,13 +18,13 @@ const GifSearcher = () => {
   const gifData = useSelector(selectGifData);
   const isSearching = useSelector(selectIsSearching);
   const dispatch = useDispatch();
-  const [search, changeSearch] = useSearch(GIF_SEARCHER_PATH);
+  const [search, changeSearch] = useSearch(GIFS_PATH);
   const { query } = search;
   const rowChunks = chunk(gifData, chunkSize);
 
   const changeQuery = (newSearchText) => changeSearch({ query: newSearchText })
   const onGifClick = (position) => () => dispatch(
-    push({ pathname: GIF_VIEWER_PATH, search: qs.stringify({ position, ...search }) })
+    push({ pathname: GIFS_VIEW_PATH, search: qs.stringify({ position, ...search }) })
   );
 
   return <>

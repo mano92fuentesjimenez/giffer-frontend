@@ -1,1 +1,1 @@
-export const PATH = '/gif-view';
+export const PATH = '/gifs/view';
