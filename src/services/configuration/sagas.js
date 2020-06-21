@@ -9,7 +9,10 @@ function* loadApp({ getPublicKey }, localStorage) {
   const storedUser = yield call(localStorage.getItem, STORED_USER_KEY)
 
   yield put(loadPublicKey(key));
-  yield put(userLoggedIn(storedUser));
+
+  if(storedUser)
+    yield put(userLoggedIn(storedUser));
+
   yield put(finishAppLoading());
 }
 

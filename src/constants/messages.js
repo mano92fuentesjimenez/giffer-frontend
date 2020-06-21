@@ -21,6 +21,7 @@ export default
       sign_up_validation_email: 'Introduzca un correo válido',
       sign_up_validation_password: 'La contraseña y la contraseña de confirmación no coinciden',
       submit: 'La contraseña y la contraseña de confirmación no coinciden',
+      notification_user_logged_in: 'Se ha logueado satisfactoriamente',
     },
     en: {
       tittle: 'Title',
@@ -42,5 +43,6 @@ export default
       sign_up_validation_name: 'Name is required',
       sign_up_validation_email: 'Type a valid email address',
       sign_up_validation_password: 'Password and confirmation password do not match',
+      notification_user_logged_in: 'Successfully logged in',
     }
   };
