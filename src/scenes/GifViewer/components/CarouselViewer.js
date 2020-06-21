@@ -74,7 +74,7 @@ const CarouselViewer = ({ location: { search }}) => {
             {gifs.map((gif, index) =>
               <div
                 className={b('gif-container')()}
-                key={gif.key}
+                key={gif.id}
                 style={{width: gifWidth}}
               >
                 <Gif
