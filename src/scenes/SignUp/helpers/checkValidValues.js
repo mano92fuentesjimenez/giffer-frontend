@@ -1,3 +1,6 @@
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
+
 const emailRegex = /^\S+@\S+\.\S+$/;
 
 const validations = {
@@ -6,6 +9,14 @@ const validations = {
   password: (v, values) => values.password === values.confirmPassword ? '' : 'sign_up_validation_password',
 }
 
+export const checkAllFields = (values) => {
+
+}
+
 export default (name, value, values) => {
-  return validations[name](value, values);
+  const validationTextId = validations[name](value, values);
+
+  if(validationTextId)
+    return <FormattedMessage id={validationTextId}/>
+  return validationTextId;
 }

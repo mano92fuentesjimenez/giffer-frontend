@@ -7,6 +7,7 @@ import './SignUp.scss'
 import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
 import { useDispatch } from 'react-redux';
 import { signUpUser } from 'services/user/actions';
+import isValid from 'scenes/SignUp/helpers/isValid';
 
 const b = bem('scenes-signup');
 const SignUp = () => {
@@ -30,16 +31,12 @@ const SignUp = () => {
       ...values,
       [name]: value,
     };
-
     setValues(changedValues);
     let validationFieldName = name;
 
     if (validationFieldName === 'confirmPassword')
       validationFieldName = 'password';
     let validationValue = checkValidValues(validationFieldName, value, changedValues )
-
-    if (validationValue)
-      validationValue = <FormattedMessage id={validationValue}/>
 
     setValidationValues({
       ...validationValues,
@@ -115,7 +112,12 @@ const SignUp = () => {
       </div>
 
       <div className={b('sign-up-container')()}>
-        <Button variant="outlined" color="primary" onClick={onSubmit}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={onSubmit}
+          disabled={!isValid(validationValues)}
+        >
           <FormattedMessage id="signup"/>
         </Button>
       </div>
