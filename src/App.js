@@ -9,7 +9,10 @@ import ModalService from 'services/modal-service/ModalService';
 import { useSelector } from 'react-redux';
 import { selectAppLoaded } from 'services/configuration/selectors';
 import Loader from 'react-loader-spinner';
-import './App.css';
+import bem from 'bem-cn'
+import './App.scss';
+
+const b = bem('app-root');
 
 function App() {
   const appLoaded = useSelector(selectAppLoaded);
@@ -33,7 +36,12 @@ function App() {
           </Switch>
         </>
       }
-      { !appLoaded && <Loader type="Rings" color='blue' height={400} width={400}/>}
+      { !appLoaded &&
+      <div className={b('loader-container')()}>
+        <Loader type="Rings" color='blue' height={400} width={400}/>
+      </div>
+      }
+
 
     </>
   );
