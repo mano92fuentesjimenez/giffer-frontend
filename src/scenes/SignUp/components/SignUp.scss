@@ -18,6 +18,7 @@
   &__form-block {
     display: flex;
     margin: 20px;
+    position: relative;
   }
 
   &__input {
@@ -28,5 +29,12 @@
     display: flex;
     justify-content: center;
     margin: 35px 0 25px;
+  }
+
+  &__show-icon {
+    position: absolute !important;
+    right: 15px;
+    top: 6px;
+    outline: none !important;
   }
 }

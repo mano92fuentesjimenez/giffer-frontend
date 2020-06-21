@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import bem from 'bem-cn';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
-import './SignUp.scss'
 import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
 import { useDispatch } from 'react-redux';
 import { signUpUser } from 'services/user/actions';
 import isValid from 'scenes/SignUp/helpers/isValid';
+import './SignUp.scss'
 
 const b = bem('scenes-signup');
 const SignUp = () => {
@@ -24,7 +27,7 @@ const SignUp = () => {
     password: false,
     confirmPassword: false,
   })
-  const [viewPassword, setViewPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +56,10 @@ const SignUp = () => {
   const onSubmit = () => {
     dispatch(signUpUser(values));
   }
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
+
   return (
     <div className={b()}>
       <div className={b('welcome')()}>
@@ -95,13 +102,20 @@ const SignUp = () => {
           label={<FormattedMessage id="signup_password"/>}
           onChange={onChange}
           name="password"
-          type={viewPassword ? 'text' : 'password'}
+          type={showPassword ? 'text' : 'password'}
           className={b('input')()}
           variant="filled"
           required
           error={!!validationValues.password}
           helperText={validationValues.password}
         />
+        <IconButton
+          className={b('show-icon')()}
+          onClick={handleTogglePasswordVisibility}
+          edge="end"
+        >
+          {showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
       </div>
       <div className={b('form-block')()}>
         <TextField
@@ -109,13 +123,20 @@ const SignUp = () => {
           label={<FormattedMessage id="signup_password_confirmation"/>}
           onChange={onChange}
           name="confirmPassword"
-          type={viewPassword ? 'text' : 'password'}
+          type={showPassword ? 'text' : 'password'}
           className={b('input')()}
           variant="filled"
           required
           error={!!validationValues.confirmPassword}
           helperText={validationValues.confirmPassword}
         />
+        <IconButton
+          className={b('show-icon')()}
+          onClick={handleTogglePasswordVisibility}
+          edge="end"
+        >
+          {showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
       </div>
 
       <div className={b('sign-up-container')()}>
