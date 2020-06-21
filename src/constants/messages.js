@@ -20,6 +20,7 @@ export default
       sign_up_validation_name: 'El nombre es requerido',
       sign_up_validation_email: 'Introduzca un correo válido',
       sign_up_validation_password: 'La contraseña y la contraseña de confirmación no coinciden',
+      sign_up_password_length_validation: 'La contraseña debe tener mas de 6 caracteres',
       submit: 'La contraseña y la contraseña de confirmación no coinciden',
       notification_user_logged_in: 'Se ha logueado satisfactoriamente',
     },
@@ -43,6 +44,7 @@ export default
       sign_up_validation_name: 'Name is required',
       sign_up_validation_email: 'Type a valid email address',
       sign_up_validation_password: 'Password and confirmation password do not match',
+      sign_up_password_length_validation: 'The password must be more than 6 characters',
       notification_user_logged_in: 'Successfully logged in',
     }
   };

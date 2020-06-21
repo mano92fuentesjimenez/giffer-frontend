@@ -22,6 +22,7 @@ const SignUp = () => {
     name: false,
     email: false,
     password: false,
+    confirmPassword: false,
   })
   const [viewPassword, setViewPassword] = useState(false);
 
@@ -32,15 +33,21 @@ const SignUp = () => {
       [name]: value,
     };
     setValues(changedValues);
-    let validationFieldName = name;
 
-    if (validationFieldName === 'confirmPassword')
-      validationFieldName = 'password';
-    let validationValue = checkValidValues(validationFieldName, value, changedValues )
+    if(name === 'password' || name === 'confirmPassword'){
+      const password = checkValidValues('password', changedValues.password, changedValues)
+      const confirmPassword = checkValidValues('confirmPassword', changedValues.confirmPassword, changedValues)
+      return setValidationValues({
+        ...validationValues,
+        password,
+        confirmPassword,
+      })
+    }
+    const validationValue = checkValidValues(name, value, changedValues)
 
     setValidationValues({
       ...validationValues,
-      [validationFieldName]: validationValue,
+      [name]: validationValue,
     })
   }
   const onSubmit = () => {
@@ -106,8 +113,8 @@ const SignUp = () => {
           className={b('input')()}
           variant="filled"
           required
-          error={!!validationValues.password}
-          helperText={validationValues.password}
+          error={!!validationValues.confirmPassword}
+          helperText={validationValues.confirmPassword}
         />
       </div>
 
