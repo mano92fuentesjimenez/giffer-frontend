@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import bem from 'bem-cn';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useIntl } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import './SignUp.scss'
 import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
 import { useDispatch } from 'react-redux';
+import { signUpUser } from 'services/user/actions';
 
 const b = bem('scenes-signup');
 const SignUp = () => {
@@ -47,7 +47,7 @@ const SignUp = () => {
     })
   }
   const onSubmit = () => {
-    dispatch();
+    dispatch(signUpUser(values));
   }
   return (
     <div className={b()}>

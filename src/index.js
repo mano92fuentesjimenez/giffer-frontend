@@ -10,6 +10,7 @@ import { createBrowserHistory } from "history";
 import configureStore from "./services/store";
 import ReactModal from 'react-modal';
 import IntlProvider from 'services/intlProvider/IntlProvider';
+import { loadApp } from 'services/configuration/actions';
 
 const history = createBrowserHistory();
 const store = configureStore(history);
@@ -31,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     </React.StrictMode>,
     document.getElementById('root')
   );
+
+  store.dispatch(loadApp());
 })
 
 // If you want your app to work offline and load faster, you can change
