@@ -10,7 +10,7 @@ export default function(state = initialState, { type, payload }) {
     case USER_LOGGED_IN:
       return {
         ...state,
-        user: payload,
+        user: payload.userObj,
         authorizationError: null,
       }
     case SIGN_UP_USER:

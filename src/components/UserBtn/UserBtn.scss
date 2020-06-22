@@ -5,12 +5,17 @@
   color: #aea9a9;
 
   &__login,
-  &__signup {
+  &__signup,
+  &__user-name {
     margin: 0 5px;
     cursor: pointer;
 
     &:hover {
       color: white;
     }
+  }
+
+  &__user-name {
+    margin-right: 5px;
   }
 }

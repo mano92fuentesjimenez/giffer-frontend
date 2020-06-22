@@ -41,7 +41,11 @@ const UserBtn = () => {
       </>
     }
     {
-      user && <Identicon value={user.email}/>
+      user &&
+      <div className='d-flex align-items-center'>
+        <span className={b('user-name')()}>{user.name}</span>
+        <Identicon value={user.email}/>
+      </div>
     }
   </div>;
 }
