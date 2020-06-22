@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import bem from 'bem-cn';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
 import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from 'services/user/actions';
 import isValid from 'scenes/SignUp/helpers/isValid';
-import './SignUp.scss'
 import { selectAuthorizationError } from 'services/user/selectors';
+import PasswordInput from 'components/PasswordInput/PasswordInput';
+import './SignUp.scss'
 
 const b = bem('scenes-signup');
 const SignUp = () => {
@@ -106,46 +104,30 @@ const SignUp = () => {
         />
       </div>
       <div className={b('form-block')()}>
-        <TextField
+        <PasswordInput
           value={values.password}
           label={<FormattedMessage id="signup_password"/>}
           onChange={onChange}
           name="password"
-          type={showPassword ? 'text' : 'password'}
-          className={b('input')()}
-          variant="filled"
           required
           error={!!validationValues.password}
           helperText={validationValues.password}
+          showPassword={showPassword}
+          handleToggleShowPassword={handleTogglePasswordVisibility}
         />
-        <IconButton
-          className={b('show-icon')()}
-          onClick={handleTogglePasswordVisibility}
-          edge="end"
-        >
-          {showPassword ? <Visibility /> : <VisibilityOff />}
-        </IconButton>
       </div>
       <div className={b('form-block')()}>
-        <TextField
+        <PasswordInput
           value={values.confirmPassword}
           label={<FormattedMessage id="signup_password_confirmation"/>}
           onChange={onChange}
           name="confirmPassword"
-          type={showPassword ? 'text' : 'password'}
-          className={b('input')()}
-          variant="filled"
           required
           error={!!validationValues.confirmPassword}
           helperText={validationValues.confirmPassword}
+          showPassword={showPassword}
+          handleToggleShowPassword={handleTogglePasswordVisibility}
         />
-        <IconButton
-          className={b('show-icon')()}
-          onClick={handleTogglePasswordVisibility}
-          edge="end"
-        >
-          {showPassword ? <Visibility /> : <VisibilityOff />}
-        </IconButton>
       </div>
 
       <div className={b('sign-up-container')()}>
