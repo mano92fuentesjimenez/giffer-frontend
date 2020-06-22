@@ -4,6 +4,7 @@ import GifSearcher,{ PATH as GIFS_PATH } from 'scenes/GifSearcher';
 import LogIn ,{ PATH as LOGIN_PATH } from 'scenes/LogIn';
 import SignUp ,{ PATH as SIGNUP_PATH } from 'scenes/SignUp';
 import CarouselViewer, { PATH as GIFS_VIEW_PATH } from 'scenes/GifViewer';
+import UserSettings, { PATH as USER_SETTINGS_PATH } from 'scenes/UserSettings';
 import Notifications from 'services/notifications/components/Notifications';
 import ModalService from 'services/modal-service/ModalService';
 import { useSelector } from 'react-redux';
@@ -28,6 +29,7 @@ function App() {
               <Route exact path={GIFS_VIEW_PATH} component={CarouselViewer}/>
               <Route exact path={LOGIN_PATH} component={LogIn}/>
               <Route exact path={SIGNUP_PATH} component={SignUp}/>
+              <Route exact path={USER_SETTINGS_PATH} component={UserSettings}/>
             </Switch>
           </ModalService>
           <Switch>
@@ -36,13 +38,12 @@ function App() {
           </Switch>
         </>
       }
-      { !appLoaded &&
-      <div className={b('loader-container')()}>
-        <Loader type="Rings" color='blue' height={400} width={400}/>
-      </div>
+      {
+        !appLoaded &&
+        <div className={b('loader-container')()}>
+          <Loader type="Rings" color='blue' height={400} width={400}/>
+        </div>
       }
-
-
     </>
   );
 }

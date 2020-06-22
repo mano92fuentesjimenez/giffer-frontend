@@ -32,6 +32,7 @@ export default
       log_in_invalid_password: 'El password es incorrecto',
       log_out: 'Cerrar Sesión',
       logged_out: 'Sesión cerrada satisfactoriamente',
+      settings: 'Configuraciones',
     },
     en: {
       tittle: 'Title',
@@ -66,5 +67,6 @@ export default
       log_in_invalid_password: 'Bad password provided',
       log_out: 'Log Out',
       logged_out: 'Successfully logout',
+      settings: 'Settings',
     }
   };

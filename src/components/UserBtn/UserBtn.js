@@ -6,6 +6,7 @@ import { push } from 'connected-react-router';
 import { selectUser } from 'services/user/selectors';
 import { PATH as LOGIN_PATH} from 'scenes/LogIn';
 import { PATH as SIGNUP_PATH} from 'scenes/SignUp';
+import { PATH as USER_SETTINGS_PATH } from 'scenes/UserSettings/constants';
 import { FormattedMessage } from 'react-intl';
 import selectSearch from 'services/search/selectSearch';
 import { getStringFromSearch } from 'services/search/helpers';
@@ -34,10 +35,8 @@ const UserBtn = () => {
 
   const onLoginClick = () => dispatch(push({ pathname: LOGIN_PATH, search: getStringFromSearch(search) }));
   const onSignUpClick = () => dispatch(push({ pathname: SIGNUP_PATH, search: getStringFromSearch(search) }));
-  const onLogoutClick = () => {
-    setShowMenu(false);
-    dispatch(logOut());
-  }
+  const onLogoutClick = () => dispatch(logOut())
+  const onUserSettingsClick = () => dispatch(push({ pathname: USER_SETTINGS_PATH, search: getStringFromSearch(search) }));
   const onToggleShowMenu = () => setShowMenu(!showMenu);
 
   return <div className={b()} ref={containerRef}>
@@ -79,6 +78,12 @@ const UserBtn = () => {
               onClick={onLogoutClick}
             >
               <FormattedMessage id={'log_out'}/>
+            </div>
+            <div
+              className={b('menu-element')()}
+              onClick={onUserSettingsClick}
+            >
+              <FormattedMessage id={'settings'}/>
             </div>
           </div>
         }
