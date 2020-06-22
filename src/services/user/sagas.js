@@ -51,8 +51,6 @@ function* logInUser( { logInUser }, { payload: userCredentials }) {
 }
 
 function* doLogIn(user) {
-  console.log(`log in ${user}`)
-  console.log(user)
   const publicKey = yield select(selectPublicKey);
 
   const userObj = yield call(jsonwebtoken.verify, user, publicKey, { algorithms: ['RS512'] });
@@ -74,7 +72,7 @@ function* logInUserFromStorage(localStorage) {
   const storedUser = yield call(localStorage.getItem, STORED_USER_KEY)
 
   if(storedUser)
-    yield call(logInUser, storedUser)
+    yield call(doLogIn, storedUser)
 }
 
 function* storeSignedUser(localStorage, action) {
