@@ -37,10 +37,11 @@
   &__menu-container {
     position: absolute;
     bottom: -77px;
-    left: -30px;
+    left: -7px;
     background: black;
     z-index: 100;
     padding: 5px 10px;
+    min-width: 100px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 0 4px 7px 1px #848484;
