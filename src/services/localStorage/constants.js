@@ -1,1 +1,1 @@
-export const STORED_USER_KEY = 'stored_user';
+export const STORED_USER_KEY = 'giffer_stored_user';
