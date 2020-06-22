@@ -3,60 +3,25 @@ import bem from 'bem-cn';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
-import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from 'services/user/actions';
 import isValid from 'scenes/SignUp/helpers/isValid';
 import { selectAuthorizationError } from 'services/user/selectors';
 import PasswordInput from 'components/PasswordInput/PasswordInput';
+import usePersonalData from 'hooks/usePersonalData';
 import './SignUp.scss'
 
 const b = bem('scenes-signup');
 const SignUp = () => {
   const dispatch = useDispatch();
   const authorizationError = useSelector(selectAuthorizationError);
+  const { values, validationValues, onChange } = usePersonalData(true);
 
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
-  const [validationValues, setValidationValues] = useState({
-    name: false,
-    email: false,
-    password: false,
-    confirmPassword: false,
-  })
-  const [showPassword, setShowPassword] = useState(false);
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    const changedValues = {
-      ...values,
-      [name]: value,
-    };
-    setValues(changedValues);
-
-    if(name === 'password' || name === 'confirmPassword'){
-      const password = checkValidValues('password', changedValues.password, changedValues)
-      const confirmPassword = checkValidValues('confirmPassword', changedValues.confirmPassword, changedValues)
-      return setValidationValues({
-        ...validationValues,
-        password,
-        confirmPassword,
-      })
-    }
-    const validationValue = checkValidValues(name, value, changedValues)
-
-    setValidationValues({
-      ...validationValues,
-      [name]: validationValue,
-    })
-  }
   const onSubmit = () => {
     dispatch(signUpUser(values));
   }
+
+  const [showPassword, setShowPassword] = useState(false);
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }

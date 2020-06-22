@@ -4,42 +4,21 @@ import { FormattedMessage } from 'react-intl';
 import TextField from '@material-ui/core/TextField';
 import { logInUser } from 'services/user/actions';
 import Button from '@material-ui/core/Button';
-import checkValidValues from '../helpers/checkValidValues';
 import isValid from '../helpers/isValid';
-import './Login.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import PasswordInput from 'components/PasswordInput/PasswordInput';
 import { selectAuthorizationError } from 'services/user/selectors';
+import usePersonalData from 'hooks/usePersonalData';
+import './Login.scss'
 
 const b = bem('scenes-login');
 const LogIn = () => {
   const dispatch = useDispatch();
   const authorizationError = useSelector(selectAuthorizationError);
 
-  const [values, setValues] = useState({
-    name: '',
-    password: '',
-  })
-  const [validationValues, setValidationValues] = useState({
-    name: false,
-    password: false,
-  })
+  const { values, validationValues, onChange } = usePersonalData(false);
   const [showPassword, setShowPassword] = useState(false);
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    const changedValues = {
-      ...values,
-      [name]: value,
-    };
-    setValues(changedValues);
 
-    const validationValue = checkValidValues(name, value, changedValues)
-
-    setValidationValues({
-      ...validationValues,
-      [name]: validationValue,
-    })
-  }
   const onSubmit = () => {
     dispatch(logInUser(values));
   }

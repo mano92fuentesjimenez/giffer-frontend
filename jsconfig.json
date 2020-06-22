@@ -7,7 +7,8 @@
       "components/*": ["./components"],
       "helpers/*": ["./helpers"],
       "hocs/*": ["./hocs"],
-      "constants/*":  ["./constants"]
+      "constants/*":  ["./constants"],
+      "hooks/*":  ["./hooks"]
     }
   }
 }
