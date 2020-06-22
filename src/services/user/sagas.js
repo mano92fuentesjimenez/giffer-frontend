@@ -1,7 +1,7 @@
 import { takeEvery, call, select, put } from 'redux-saga/effects';
 import { PATH as GIFS_PATH } from 'scenes/GifSearcher';
 import { push } from 'connected-react-router';
-import { LOG_IN_USER, LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
+import { LOG_IN_USER, LOG_OUT, LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
 import jsonwebtoken from 'jsonwebtoken';
 import { selectAppLoaded, selectPublicKey } from 'services/configuration/selectors';
 import { authorizationError, userLoggedIn as userLoggedInAction } from './actions';
@@ -50,6 +50,14 @@ function* logInUser( { logInUser }, { payload: userCredentials }) {
   }
 }
 
+function* logOut(localStorage) {
+  yield call(localStorage.removeItem, STORED_USER_KEY);
+  yield put(showNotifications({
+    type: NOTIFICATION_TYPES.INFO,
+    textId: 'logged_out',
+  }))
+}
+
 function* doLogIn(user) {
   const publicKey = yield select(selectPublicKey);
 
@@ -82,6 +90,7 @@ function* storeSignedUser(localStorage, action) {
 export default function* ({ api, localStorage }) {
   yield takeEvery(SIGN_UP_USER, signUpUser, api);
   yield takeEvery(LOG_IN_USER, logInUser, api);
+  yield takeEvery(LOG_OUT, logOut, localStorage);
   yield takeEvery(USER_LOGGED_IN, userLoggedIn, api);
   yield takeEvery(USER_LOGGED_IN, storeSignedUser, localStorage);
   yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);

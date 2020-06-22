@@ -1,4 +1,4 @@
-import { AUTHORIZATION_ERROR, LOG_IN_USER, SIGN_UP_USER, USER_LOGGED_IN } from './constants';
+import { AUTHORIZATION_ERROR, LOG_IN_USER, LOG_OUT, SIGN_UP_USER, USER_LOGGED_IN } from './constants';
 
 const initialState = {
   user: null,
@@ -24,6 +24,8 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         authorizationError: payload,
       }
+    case LOG_OUT:
+      return initialState;
     default:
       return state;
   }

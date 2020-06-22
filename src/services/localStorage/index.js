@@ -12,8 +12,13 @@ export default () => {
     return null;
   }
 
+  const removeItem = key => {
+    store.removeItem(key);
+  }
+
   return {
     setItem,
     getItem,
+    removeItem,
   }
 }

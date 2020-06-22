@@ -6,16 +6,46 @@
 
   &__login,
   &__signup,
-  &__user-name {
+  &__user-info,
+  &__menu-element {
     margin: 0 5px;
     cursor: pointer;
 
     &:hover {
       color: white;
+      & img {
+        opacity: 1;
+      }
     }
   }
 
   &__user-name {
     margin-right: 5px;
   }
+
+  &__user-info,
+  &__user-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    & img {
+      opacity: 0.9;
+    }
+  }
+
+  &__menu-container {
+    position: absolute;
+    bottom: -51px;
+    left: -30px;
+    width: 100px;
+    background: black;
+    z-index: 100;
+    padding: 10px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 4px 7px 1px #848484;
+    font-size: 14px;
+  }
+
 }

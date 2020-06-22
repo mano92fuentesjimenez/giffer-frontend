@@ -30,6 +30,8 @@ export default
       log_in_password: 'Contraseña',
       log_in_user_not_found: 'El usuario no existe',
       log_in_invalid_password: 'El password es incorrecto',
+      log_out: 'Cerrar Sesión',
+      logged_out: 'Sesión cerrada satisfactoriamente',
     },
     en: {
       tittle: 'Title',
@@ -62,5 +64,7 @@ export default
       log_in_password: 'Password',
       log_in_user_not_found: 'User not exists',
       log_in_invalid_password: 'Bad password provided',
+      log_out: 'Log Out',
+      logged_out: 'Successfully logout',
     }
   };

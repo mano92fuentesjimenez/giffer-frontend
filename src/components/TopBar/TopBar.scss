@@ -1,5 +1,6 @@
 .components-top-bar {
   background: black;
+  z-index: 1000;
 
   &__top-bar {
     max-width: 1140px;
