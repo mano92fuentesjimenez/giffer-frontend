@@ -1,14 +1,15 @@
-import { FormattedMessage } from 'react-intl';
 import React from 'react';
-
-const emailRegex = /^\S+@\S+\.\S+$/;
+import { FormattedMessage } from 'react-intl';
+import { emailComposition, nameComposition, passwordLength } from 'helpers/validations';
 
 const validations = {
-  name: v => v.length !== 0 ? '' : 'sign_up_validation_name',
-  email: v => emailRegex.test(v) ? '' : 'sign_up_validation_email',
+  name: nameComposition,
+  email: emailComposition,
   password: (v, values) => {
     let message = values.password === values.confirmPassword ? '' : 'sign_up_validation_password'
-    message = values.password.length > 6 ? message: 'sign_up_password_length_validation';
+    const passwordLengthMessage = passwordLength(values.password);
+
+    message = passwordLengthMessage === '' ? message : passwordLengthMessage;
     return message
   },
   confirmPassword: (v, values) => values.password === values.confirmPassword ? '' : 'sign_up_validation_password',
