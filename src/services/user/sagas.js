@@ -60,12 +60,18 @@ function* logOut(localStorage) {
 
 function* doLogIn(user) {
   const publicKey = yield select(selectPublicKey);
+  try {
+    const userObj = yield call(jsonwebtoken.verify, user, publicKey, {algorithms: ['RS512']});
+    yield put(userLoggedInAction({
+      userObj,
+      token: user,
+    }));
+  }
+  catch (e) {
+    if(e instanceof JsonWebTokenError)
+      yield put(logOutAction());
+  }
 
-  const userObj = yield call(jsonwebtoken.verify, user, publicKey, { algorithms: ['RS512'] });
-  yield put(userLoggedInAction({
-    userObj,
-    token: user,
-  }));
 }
 
 function* userLoggedIn() {

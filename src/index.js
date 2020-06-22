@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './serviceWorker';
 import { SearchProvider } from 'services/search/context';
 import { createBrowserHistory } from "history";
-import configureStore from "./services/store";
+import { configureStore } from 'services/store';
 import ReactModal from 'react-modal';
 import IntlProvider from 'services/intlProvider/IntlProvider';
 import { loadApp } from 'services/configuration/actions';
