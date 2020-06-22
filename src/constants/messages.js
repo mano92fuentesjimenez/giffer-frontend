@@ -26,6 +26,10 @@ export default
       sign_up_validation_name_exists: 'Nombre de usuario ya existe',
       sign_up_validation_email_exists: 'Correo ya existe',
       undefined_error: 'Ha ocurrido un error',
+      log_in_name: 'Correo o Nombre de Usuario',
+      log_in_password: 'Contraseña',
+      log_in_user_not_found: 'El usuario no existe',
+      log_in_invalid_password: 'El password es incorrecto',
     },
     en: {
       tittle: 'Title',
@@ -52,5 +56,11 @@ export default
       sign_up_validation_name_exists: 'Name already taken',
       sign_up_validation_email_exists: 'Email already taken',
       undefined_error: 'An error occurred',
+      log_in_welcome: 'Welcome to Giffer',
+      log_in_welcome_description: 'Please fill the form to log in',
+      log_in_name: 'Email or Name',
+      log_in_password: 'Password',
+      log_in_user_not_found: 'User not exists',
+      log_in_invalid_password: 'Bad password provided',
     }
   };

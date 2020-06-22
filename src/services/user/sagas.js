@@ -1,7 +1,7 @@
 import { takeEvery, call, select, put } from 'redux-saga/effects';
 import { PATH as GIFS_PATH } from 'scenes/GifSearcher';
 import { push } from 'connected-react-router';
-import { LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
+import { LOG_IN_USER, LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
 import jsonwebtoken from 'jsonwebtoken';
 import { selectAppLoaded, selectPublicKey } from 'services/configuration/selectors';
 import { authorizationError, userLoggedIn as userLoggedInAction } from './actions';
@@ -12,7 +12,7 @@ import { STORED_USER_KEY } from 'services/localStorage/constants';
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
     const signedUser = yield call(signUpUser, user);
-    yield call(logInUser, signedUser);
+    yield call(doLogIn, signedUser);
   }
   catch (e) {
     let errorMsg = 'undefined_error';
@@ -34,7 +34,25 @@ function* signUpUser({ signUpUser }, { payload: user }) {
   }
 }
 
-function* logInUser(user) {
+function* logInUser( { logInUser }, { payload: userCredentials }) {
+  try {
+    const user = yield call(logInUser, userCredentials)
+    yield call(doLogIn, user);
+  }
+  catch (e) {
+    let errorMsg = 'undefined_error';
+    if(e.response.status === 404 && e.response.data === 'User not found' )
+      errorMsg = 'log_in_user_not_found';
+    if(e.response.status === 403 && e.response.data === 'Incorrect password supplied') {
+      errorMsg = 'log_in_invalid_password';
+    }
+    yield put(authorizationError(errorMsg));
+  }
+}
+
+function* doLogIn(user) {
+  console.log(`log in ${user}`)
+  console.log(user)
   const publicKey = yield select(selectPublicKey);
 
   const userObj = yield call(jsonwebtoken.verify, user, publicKey, { algorithms: ['RS512'] });
@@ -64,8 +82,9 @@ function* storeSignedUser(localStorage, action) {
 }
 
 export default function* ({ api, localStorage }) {
-  yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);
   yield takeEvery(SIGN_UP_USER, signUpUser, api);
+  yield takeEvery(LOG_IN_USER, logInUser, api);
   yield takeEvery(USER_LOGGED_IN, userLoggedIn, api);
   yield takeEvery(USER_LOGGED_IN, storeSignedUser, localStorage);
+  yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);
 };

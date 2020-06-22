@@ -32,6 +32,11 @@ export default function () {
     return userTransmuter(client.post('/sign-up', { password, name, email }));
   }
 
+  const logInUser = userCredentials => {
+    const { password, name } = userCredentials;
+    return userTransmuter(client.post('/log-in', { password, name }));
+  }
+
   const getPublicKey = () => {
     return keyTransmuter(client.get('getPublicKey'));
   }
@@ -41,5 +46,6 @@ export default function () {
     searchTrendingGifs,
     signUpUser,
     getPublicKey,
+    logInUser,
   }
 }
