@@ -17,13 +17,9 @@ const LogIn = () => {
   const authorizationError = useSelector(selectAuthorizationError);
 
   const { values, validationValues, onChange } = usePersonalData(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = () => {
     dispatch(logInUser(values));
-  }
-  const handleTogglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   }
 
   return (
@@ -63,8 +59,6 @@ const LogIn = () => {
           required
           error={!!validationValues.password}
           helperText={validationValues.password}
-          showPassword={showPassword}
-          handleToggleShowPassword={handleTogglePasswordVisibility}
         />
       </div>
 

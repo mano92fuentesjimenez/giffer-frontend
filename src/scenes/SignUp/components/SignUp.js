@@ -21,11 +21,6 @@ const SignUp = () => {
     dispatch(signUpUser(values));
   }
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleTogglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  }
-
   return (
     <div className={b()}>
       <div className={b('welcome')()}>
@@ -77,8 +72,6 @@ const SignUp = () => {
           required
           error={!!validationValues.password}
           helperText={validationValues.password}
-          showPassword={showPassword}
-          handleToggleShowPassword={handleTogglePasswordVisibility}
         />
       </div>
       <div className={b('form-block')()}>
@@ -90,8 +83,6 @@ const SignUp = () => {
           required
           error={!!validationValues.confirmPassword}
           helperText={validationValues.confirmPassword}
-          showPassword={showPassword}
-          handleToggleShowPassword={handleTogglePasswordVisibility}
         />
       </div>
 
