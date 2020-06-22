@@ -4,14 +4,34 @@ import { push } from 'connected-react-router';
 import { LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
 import jsonwebtoken from 'jsonwebtoken';
 import { selectAppLoaded, selectPublicKey } from 'services/configuration/selectors';
-import { userLoggedIn as userLoggedInAction } from './actions';
+import { authorizationError, userLoggedIn as userLoggedInAction } from './actions';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
 
 function* signUpUser({ signUpUser }, { payload: user }) {
-  const signedUser = yield call(signUpUser, user);
-  yield call(logInUser, signedUser);
+  try {
+    const signedUser = yield call(signUpUser, user);
+    yield call(logInUser, signedUser);
+  }
+  catch (e) {
+    let errorMsg = 'undefined_error';
+    if(e.response.status === 409){
+      // eslint-disable-next-line
+      switch (e.response.data) {
+        case 'User already exists':
+          errorMsg = 'sign_up_validation_name_exists';
+          break
+        case 'Email already taken':
+          errorMsg = 'sign_up_validation_email_exists';
+          break
+      }
+    }
+    if(e.response.status === 400 && e.response.data === 'child "email" fails because ["email" must be a valid email]') {
+      errorMsg = 'sign_up_validation_email';
+    }
+    yield put(authorizationError(errorMsg));
+  }
 }
 
 function* logInUser(user) {

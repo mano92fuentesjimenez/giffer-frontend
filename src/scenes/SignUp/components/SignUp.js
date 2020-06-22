@@ -7,14 +7,17 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { FormattedMessage } from 'react-intl';
 import checkValidValues from 'scenes/SignUp/helpers/checkValidValues';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from 'services/user/actions';
 import isValid from 'scenes/SignUp/helpers/isValid';
 import './SignUp.scss'
+import { selectAuthorizationError } from 'services/user/selectors';
 
 const b = bem('scenes-signup');
 const SignUp = () => {
   const dispatch = useDispatch();
+  const authorizationError = useSelector(selectAuthorizationError);
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -68,6 +71,12 @@ const SignUp = () => {
       <div className={b('welcome-description')()}>
         <FormattedMessage id="signup_welcome_description"/>
       </div>
+      {
+        authorizationError &&
+        <div className={b('authorization-error')()}>
+          <FormattedMessage id={authorizationError} />
+        </div>
+      }
       <div className={b('form-block')()}>
         <TextField
           value={values.name}

@@ -23,6 +23,9 @@ export default
       sign_up_password_length_validation: 'La contraseña debe tener mas de 6 caracteres',
       submit: 'La contraseña y la contraseña de confirmación no coinciden',
       notification_user_logged_in: 'Se ha logueado satisfactoriamente',
+      sign_up_validation_name_exists: 'Nombre de usuario ya existe',
+      sign_up_validation_email_exists: 'Correo ya existe',
+      undefined_error: 'Ha ocurrido un error',
     },
     en: {
       tittle: 'Title',
@@ -46,5 +49,8 @@ export default
       sign_up_validation_password: 'Password and confirmation password do not match',
       sign_up_password_length_validation: 'The password must be more than 6 characters',
       notification_user_logged_in: 'Successfully logged in',
+      sign_up_validation_name_exists: 'Name already taken',
+      sign_up_validation_email_exists: 'Email already taken',
+      undefined_error: 'An error occurred',
     }
   };
