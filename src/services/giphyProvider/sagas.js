@@ -1,7 +1,7 @@
 import { call, put, takeEvery, delay, select } from 'redux-saga/effects'
 import { LOAD_MORE, SEARCH_GIFS, SEARCH_TRENDING_GIFS, SEARCHING_DELAY } from './constants';
-import { startLoadingGifs, stopSearch, updateGifs } from './actions';
-import {selectIsSearching, selectSearchInfo} from './selectors';
+import { startLoadingGifs, stopSearch, gifsLoaded } from './actions';
+import { selectGifData, selectIsSearching, selectSearchInfo } from './selectors';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 
@@ -17,7 +17,7 @@ function* searchGifs({ searchGifs }, { payload: { query }}) {
     const timestamp = Date.now();
     const data = yield call(searchGifs, query);
 
-    yield put(updateGifs({
+    yield put(gifsLoaded({
       ...data,
       timestamp,
     }));
@@ -36,7 +36,7 @@ function* searchTrendingGifs({ searchTrendingGifs }) {
     const timestamp = Date.now();
     const data = yield call(searchTrendingGifs);
 
-    yield put(updateGifs({
+    yield put(gifsLoaded({
       ...data,
       timestamp,
     }));
@@ -61,7 +61,11 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   if (query) data = yield call(searchGifs, query, pagination.offset + pagination.count);
   else data = yield call(searchTrendingGifs,pagination.offset + pagination.count);
 
-  yield put(updateGifs(data));
+  const actualGifData = yield select(selectGifData);
+  yield put(gifsLoaded([
+    ...actualGifData,
+    ...data,
+  ]));
 }
 
 export default function* ({ api }) {

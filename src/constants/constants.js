@@ -1,4 +1,4 @@
-export const SEARCH_DELAY = 200;
+export const SEARCH_DELAY = 500;
 export const PAGINATION_LIMIT = 36;
 
 export const RATINGS = {

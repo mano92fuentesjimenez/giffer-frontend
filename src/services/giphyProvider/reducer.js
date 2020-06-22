@@ -28,7 +28,6 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         gifs: [
-          ...state.gifs,
           ...payload.data
         ],
         searching: false,
