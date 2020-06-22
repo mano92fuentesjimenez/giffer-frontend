@@ -62,10 +62,13 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   else data = yield call(searchTrendingGifs,pagination.offset + pagination.count);
 
   const actualGifData = yield select(selectGifData);
-  yield put(gifsLoaded([
-    ...actualGifData,
+  yield put(gifsLoaded({
     ...data,
-  ]));
+    data: [
+      ...data.data,
+      ...actualGifData,
+    ]
+  }));
 }
 
 export default function* ({ api }) {
