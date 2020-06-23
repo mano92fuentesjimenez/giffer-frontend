@@ -40,4 +40,9 @@
       width: 135px;
     }
   }
+
+  &__authorization-error {
+    color: red;
+    font-size: 14px;
+  }
 }

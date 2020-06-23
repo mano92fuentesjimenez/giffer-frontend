@@ -20,6 +20,7 @@ import {
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
+import { getUserDataError } from 'services/user/helpers';
 
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
@@ -30,21 +31,7 @@ function* signUpUser({ signUpUser }, { payload: user }) {
     }
   }
   catch (e) {
-    let errorMsg = 'undefined_error';
-    if(e.response.status === 409){
-      // eslint-disable-next-line
-      switch (e.response.data) {
-        case 'User already exists':
-          errorMsg = 'sign_up_validation_name_exists';
-          break
-        case 'Email already taken':
-          errorMsg = 'sign_up_validation_email_exists';
-          break
-      }
-    }
-    if(e.response.status === 400 && e.response.data === 'child "email" fails because ["email" must be a valid email]') {
-      errorMsg = 'sign_up_validation_email';
-    }
+    const errorMsg = getUserDataError(e);
     yield put(authorizationError(errorMsg));
   }
 }
@@ -110,12 +97,18 @@ function* storeSignedUser(localStorage, action) {
 }
 
 function* changeUserPersonalData({ changeUserPersonalData }, { payload: personalData}) {
-  const user = yield call(changeUserPersonalData, personalData);
-  yield put(refreshTokenAction(user));
-  yield put(showNotifications({
-    type: NOTIFICATION_TYPES.INFO,
-    textId: 'changed_notification',
-  }))
+
+  try {
+    const user = yield call(changeUserPersonalData, personalData);
+    yield put(refreshTokenAction(user));
+    yield put(showNotifications({
+      type: NOTIFICATION_TYPES.INFO,
+      textId: 'changed_notification',
+    }))
+  } catch (e) {
+    const errorMsg = getUserDataError(e);
+    yield put(authorizationError(errorMsg));
+  }
 }
 
 function* refreshToken({ payload: userToken }) {

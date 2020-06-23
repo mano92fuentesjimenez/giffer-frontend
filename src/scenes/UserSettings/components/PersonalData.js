@@ -8,7 +8,7 @@ import usePersonalData from 'hooks/usePersonalData';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserPersonalData, removeAccount } from 'services/user/actions';
-import { selectUser } from 'services/user/selectors';
+import { selectAuthorizationError, selectUser } from 'services/user/selectors';
 import './PersonalData.scss'
 
 const b = bem('scenes-user-settings-personal-data');
@@ -17,6 +17,7 @@ const PersonalData = () => {
 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const authorizationError = useSelector(selectAuthorizationError);
   const {values, validationValues, onChange} = usePersonalData(true, user);
   const [removingAccount, setRemovingAccount] = useState(false);
 
@@ -74,6 +75,12 @@ const PersonalData = () => {
           </Button>
         </div>
 
+        {
+          authorizationError &&
+          <div className={b('authorization-error')()}>
+            <FormattedMessage id={authorizationError} />
+          </div>
+        }
         <div className={b('form-block')()}>
           <TextField
             value={values.name}
