@@ -6,3 +6,5 @@ export const LOG_OUT = 'services.user.log_out_user';
 export const AUTHORIZATION_ERROR = 'services.user.authorization_error';
 export const CHANGE_USER_PERSONAL_DATA = 'services.user.change_personal_data';
 export const REFRESH_TOKEN = 'services.user.refresh_token';
+export const REMOVE_ACCOUNT = 'services.user.remove_account';
+export const ACCOUNT_REMOVED = 'services.user.account_removed';

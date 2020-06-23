@@ -52,7 +52,11 @@ export default function () {
   }
 
   const changeUserPersonalData = personalData => {
-    return userTransmuter(client.post(`/user/update`, getBody(personalData, true)));
+    return userTransmuter(client.put(`/user`, getBody(personalData, true)));
+  }
+
+  const removeUserAccount = () => {
+    return client.post(`/user/remove`, getBody({}, true));
   }
 
   return {
@@ -62,5 +66,6 @@ export default function () {
     getPublicKey,
     logInUser,
     changeUserPersonalData,
+    removeUserAccount
   }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import bem from 'bem-cn'
 import TextField from '@material-ui/core/TextField';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { FormattedMessage } from 'react-intl';
 import PasswordInput from 'components/PasswordInput/PasswordInput';
 import usePersonalData from 'hooks/usePersonalData';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUserPersonalData } from 'services/user/actions';
+import { changeUserPersonalData, removeAccount } from 'services/user/actions';
 import { selectUser } from 'services/user/selectors';
 import './PersonalData.scss'
 
@@ -23,8 +24,23 @@ const PersonalData = () => {
       [fieldName]: values[fieldName],
     }));
 
+  const onRemoveAccount = () => dispatch(removeAccount());
+
   return <div className={b()}>
-    <div className={b('title')()}><FormattedMessage id={'settings_personal_title'}/> </div>
+    <div className={b('title')()}>
+      <FormattedMessage id={'settings_personal_title'}/>
+      <Button
+        variant="contained"
+        color="secondary"
+        className={b('button')()}
+        onClick={onRemoveAccount}
+        startIcon={<DeleteIcon />}
+        size="small"
+      >
+        <FormattedMessage id="remove_account" />
+      </Button>
+    </div>
+
     <div className={b('form-block')()}>
       <TextField
         value={values.name}
@@ -103,7 +119,7 @@ const PersonalData = () => {
       onClick={onSubmit('password')}
       disabled={validationValues.password !== '' && validationValues.confirmPassword !== ''}
     >
-      <FormattedMessage id="signup"/>
+      <FormattedMessage id="change_password"/>
     </Button>
   </div>
 }

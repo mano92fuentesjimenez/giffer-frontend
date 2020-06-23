@@ -29,13 +29,16 @@ export default
       log_in_name: 'Correo o Nombre de Usuario',
       log_in_password: 'Contraseña',
       log_in_user_not_found: 'El usuario no existe',
-      log_in_invalid_password: 'El password es incorrecto',
+      log_in_invalid_password: 'La contraseña es incorrecto',
       log_out: 'Cerrar Sesión',
       logged_out: 'Sesión cerrada satisfactoriamente',
       settings: 'Configuraciones',
       settings_personal_title: 'Cambiar datos personales',
       settings_change_name: 'Cambiar Nombre',
-      changed_notification: 'Cambiado satisfactoriamente'
+      changed_notification: 'Cambiado satisfactoriamente',
+      change_password: 'Cambiar Contraseña',
+      remove_account: 'Eliminar cuenta',
+      account_removed: 'Cuenta eliminada satisfactoriamente',
     },
     en: {
       tittle: 'Title',
@@ -75,6 +78,9 @@ export default
       settings_personal_title: 'Change Personal info',
       settings_change_name: 'Change Name',
       settings_change_email: 'Change Email',
-      changed_notification: 'Successfully changed'
+      changed_notification: 'Successfully changed',
+      change_password: 'Change Password',
+      remove_account: 'Remove Account',
+      account_removed: 'Account successfully removed',
     }
   };

@@ -5,7 +5,7 @@ import {
   CHANGE_USER_PERSONAL_DATA,
   LOG_IN_USER,
   LOG_OUT,
-  LOGIN_USER_FROM_STORAGE, REFRESH_TOKEN,
+  LOGIN_USER_FROM_STORAGE, REFRESH_TOKEN, REMOVE_ACCOUNT,
   SIGN_UP_USER,
   USER_LOGGED_IN
 } from 'services/user/constants';
@@ -15,7 +15,7 @@ import {
   authorizationError,
   userLoggedIn as userLoggedInAction,
   logOut as logOutAction,
-  refreshToken as refreshTokenAction,
+  refreshToken as refreshTokenAction, accountRemoved,
 } from './actions';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
@@ -122,6 +122,17 @@ function* refreshToken({ payload: userToken }) {
   yield call(doLogIn, userToken)
 }
 
+function* removeAccount({ removeUserAccount }, localStorage) {
+  yield call(removeUserAccount);
+  yield call(localStorage.removeItem, STORED_USER_KEY);
+  yield put(accountRemoved());
+  yield put(push(GIFS_PATH))
+  yield put(showNotifications({
+    type: NOTIFICATION_TYPES.INFO,
+    textId: 'account_removed',
+  }))
+}
+
 export default function* ({ api, localStorage }) {
   yield takeEvery(SIGN_UP_USER, signUpUser, api);
   yield takeEvery(LOG_IN_USER, logInUser, api);
@@ -130,4 +141,5 @@ export default function* ({ api, localStorage }) {
   yield takeEvery(REFRESH_TOKEN, refreshToken);
   yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);
   yield takeEvery(CHANGE_USER_PERSONAL_DATA, changeUserPersonalData, api);
+  yield takeEvery(REMOVE_ACCOUNT, removeAccount, api, localStorage);
 };
