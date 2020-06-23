@@ -2,6 +2,7 @@ export default
   {
     es: {
       tittle: 'Título',
+      search: 'Buscar',
       uploadedBy: 'Subido por',
       rating: 'Clasificación',
       creationTime: 'Fecha de creación',
@@ -55,6 +56,7 @@ export default
     },
     en: {
       tittle: 'Title',
+      search: 'Search',
       uploadedBy: 'Uploaded by',
       rating: 'Rating',
       creationTime: 'Creation Time',

@@ -6,7 +6,7 @@ const b = bem('components-image');
 
 const Image = ({ className, onClick, alt, src }) => {
   return (
-    <div className={b.mix(className)()}>
+    <div className={b.mix(className)({ onClick: !!onClick })()}>
       <img src={src} alt={alt} onClick={onClick} />
     </div>
   )

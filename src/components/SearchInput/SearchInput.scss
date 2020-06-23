@@ -1,12 +1,29 @@
-.search-input input {
-  width: 250px;
-  height: 30px;
-  padding: 12px;
-  background: #e8e8e8;
-  font-weight: 900;
-  color: black;
-  border-radius: 15px;
-  outline: none;
+.components-search-input {
+  position: relative;
+
+  & input {
+    width: 250px;
+    height: 30px;
+    padding: 12px;
+    background: #e8e8e8;
+    font-weight: 900;
+    color: black;
+    border-radius: 15px;
+    outline: none;
+  }
+
+  &__search-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    padding-bottom: 0;
+
+    & img {
+      height: 20px;
+    }
+  }
 }
 
 
