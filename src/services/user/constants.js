@@ -8,3 +8,4 @@ export const CHANGE_USER_PERSONAL_DATA = 'services.user.change_personal_data';
 export const REFRESH_TOKEN = 'services.user.refresh_token';
 export const REMOVE_ACCOUNT = 'services.user.remove_account';
 export const ACCOUNT_REMOVED = 'services.user.account_removed';
+export const CLEAN_AUTHORIZATION_ERRORS = 'services.user.clean_authorization_errors';

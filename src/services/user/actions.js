@@ -1,6 +1,6 @@
 import {
   ACCOUNT_REMOVED,
-  AUTHORIZATION_ERROR, CHANGE_USER_PERSONAL_DATA,
+  AUTHORIZATION_ERROR, CHANGE_USER_PERSONAL_DATA, CLEAN_AUTHORIZATION_ERRORS,
   LOG_IN_USER,
   LOG_OUT,
   LOGIN_USER_FROM_STORAGE, REFRESH_TOKEN, REMOVE_ACCOUNT,
@@ -18,3 +18,4 @@ export const changeUserPersonalData = (personalData) => ({ type: CHANGE_USER_PER
 export const refreshToken = (userToken) => ({ type: REFRESH_TOKEN, payload: userToken });
 export const removeAccount = () => ({ type: REMOVE_ACCOUNT });
 export const accountRemoved = () => ({ type: ACCOUNT_REMOVED });
+export const cleanAuthorizationErrors = () => ({ type: CLEAN_AUTHORIZATION_ERRORS });

@@ -1,6 +1,6 @@
 import {
   ACCOUNT_REMOVED,
-  AUTHORIZATION_ERROR,
+  AUTHORIZATION_ERROR, CLEAN_AUTHORIZATION_ERRORS,
   LOG_IN_USER,
   LOG_OUT,
   SIGN_UP_USER,
@@ -22,6 +22,7 @@ export default function(state = initialState, { type, payload }) {
         token: payload.token,
         authorizationError: null,
       }
+    case CLEAN_AUTHORIZATION_ERRORS:
     case SIGN_UP_USER:
     case LOG_IN_USER:
       return {

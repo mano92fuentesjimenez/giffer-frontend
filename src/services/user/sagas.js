@@ -1,6 +1,4 @@
 import { takeEvery, call, select, put } from 'redux-saga/effects';
-import { PATH as GIFS_PATH } from 'scenes/GifSearcher';
-import { push } from 'connected-react-router';
 import {
   CHANGE_USER_PERSONAL_DATA,
   LOG_IN_USER,
@@ -21,13 +19,14 @@ import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
 import { getUserDataError } from 'services/user/helpers';
+import { goToGifs } from 'scenes/GifSearcher/actions';
 
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
     const signedUser = yield call(signUpUser, user);
     if(yield call(doLogIn, signedUser)) {
-      yield put(push(GIFS_PATH))
-      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}))
+      yield put(goToGifs());
+      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}));
     }
   }
   catch (e) {
@@ -40,8 +39,8 @@ function* logInUser( { logInUser }, { payload: userCredentials }) {
   try {
     const user = yield call(logInUser, userCredentials)
     if(yield call(doLogIn, user)) {
-      yield put(push(GIFS_PATH))
-      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}))
+      yield put(goToGifs());
+      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}));
     }
   }
   catch (e) {
@@ -119,7 +118,7 @@ function* removeAccount({ removeUserAccount }, localStorage) {
   yield call(removeUserAccount);
   yield call(localStorage.removeItem, STORED_USER_KEY);
   yield put(accountRemoved());
-  yield put(push(GIFS_PATH))
+  yield put(goToGifs());
   yield put(showNotifications({
     type: NOTIFICATION_TYPES.INFO,
     textId: 'account_removed',

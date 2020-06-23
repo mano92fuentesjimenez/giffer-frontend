@@ -4,6 +4,8 @@ import modalSagas from 'services/modal-service/sagas';
 import userSagas from 'services/user/sagas';
 import configurationSagas from 'services/configuration/sagas';
 import { sagas as gifSearcherSagas } from 'scenes/GifSearcher';
+import { sagas as logInSagas } from 'scenes/LogIn';
+import { sagas as signUpSagas } from 'scenes/SignUp';
 
 export default [
   giphyProviderSagas,
@@ -12,4 +14,6 @@ export default [
   modalSagas,
   userSagas,
   configurationSagas,
+  logInSagas,
+  signUpSagas
 ];

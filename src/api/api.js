@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PAGINATION_LIMIT } from "constants/constants";
 import { giffsTransmuter, keyTransmuter, userTransmuter } from 'api/transmuters';
 import getStore from 'services/store';
-import { selectToken, selectUser } from 'services/user/selectors';
+import { selectToken } from 'services/user/selectors';
 
 export default function () {
   const client = axios.create({
