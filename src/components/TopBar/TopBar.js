@@ -8,6 +8,7 @@ const b = bem('components-top-bar');
 const TopBar = ({ query, changeQuery }) => (
   <div className={b()}>
     <div className={b('top-bar')()}>
+      <span className={b('app-title')()}>Giffer</span>
       <SearchInput query={query} changeQuery={changeQuery}/>
       <UserBtn />
     </div>

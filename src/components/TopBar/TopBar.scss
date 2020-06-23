@@ -3,12 +3,18 @@
   z-index: 1000;
 
   &__top-bar {
-    max-width: 1140px;
+    max-width: 1120px;
     width: 100%;
     margin: 0 auto 10px;
-    padding: 10px;
+    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  
+  &__app-title {
+    font-family: holtwood-one-sc, Arial, serif;
+    font-size: 35px;
+    color: #e8e8e8;
   }
 }
