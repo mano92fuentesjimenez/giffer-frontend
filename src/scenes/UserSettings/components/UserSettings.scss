@@ -1,13 +1,21 @@
 
 .scenes-user-settings {
-  width: 500px;
-
-  padding: 25px;
+  width: 1000px;
+  padding: 25px 40px 25px 25px;
 
   &__title {
     font-size: 20px;
     text-align: center;
     font-weight: 500;
+    margin-bottom: 25px;
   }
 
+  &__settings-container {
+    display: flex;
+  }
+
+  &__separator {
+    border-left: dashed 1px #8a8ab7;
+    margin: 0 16px;
+  }
 }

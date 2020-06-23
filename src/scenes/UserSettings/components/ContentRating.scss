@@ -1,0 +1,38 @@
+.scenes-user-settings-content-rating {
+  flex-grow: 1;
+  max-width: 500px;
+
+  &__settings-container {
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__description {
+    flex-grow: 1;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  &__description-title {
+    margin-bottom: 10px;
+  }
+
+  &__description-container {
+    width: 270px;
+    height: 200px;
+  }
+
+  &__description {
+    font-size: 14px;
+  }
+
+  &__button {
+    text-transform: none !important;
+    font-weight: 600 !important;
+  }
+}

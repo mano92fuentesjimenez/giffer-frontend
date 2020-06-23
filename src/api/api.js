@@ -10,10 +10,12 @@ export default function () {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  const getParams = (params = {}) =>{
+  const getParams = (params = {}, auth) => {
+    const token = selectToken(getStore().getState());
     return {
         params: {
           ...params,
+          ...(auth ? { token } : {}),
       }
     }
   };
@@ -28,13 +30,13 @@ export default function () {
 
   const searchGifs = (text, offset = 0, limit = PAGINATION_LIMIT) => {
     return giffsTransmuter(
-      client.get('gifs/search', getParams({ q: text, offset, limit })),
+      client.get('gifs/search', getParams({ q: text, offset, limit }, true)),
       text,
     );
   };
 
   const searchTrendingGifs = (offset = 0, limit = PAGINATION_LIMIT) => {
-    return giffsTransmuter(client.get('gifs/trending', getParams({ offset, limit })));
+    return giffsTransmuter(client.get('gifs/trending', getParams({ offset, limit }, true)));
   };
 
   const signUpUser = (user) => {

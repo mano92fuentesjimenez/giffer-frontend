@@ -1,5 +1,8 @@
 
 .scenes-user-settings-personal-data {
+  flex-grow: 1;
+  max-width: 500px;
+
   &__form-block {
     display: flex;
     margin: 20px 0;

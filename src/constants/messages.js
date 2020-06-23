@@ -41,6 +41,17 @@ export default
       account_removed: 'Cuenta eliminada satisfactoriamente',
       remove_account_confirmation: 'Estás seguro de eliminar tu cuenta?',
       cancel: 'Cancelar',
+      content_rating_settings: 'Configuración de categoría de contenido',
+      content_rating_g_title: 'G – Amplia Audiencia',
+      content_rating_pg_title: 'PG – Guía de los Padres Sugerida',
+      content_rating_pg_13_title: 'PG-13 – Advertencia Fuerte a los Padres',
+      content_rating_r_title: 'R – Restringido',
+      content_rating_g_description: 'Todas las edad son admitidas. No hay nada que pueda ofender a los padres si los niños lo ven',
+      content_rating_pg_description: 'El contenido puede no ser adecuado para los niños. Se insta a los padres a dar "orientación de los padres". Puede contener material que a los padres no les guste para sus hijos pequeños',
+      content_rating_pg_13_description: 'Algunos materiales pueden ser inapropiados para niños menores de 13 años. Se insta a los padres a ser cautelosos. Algunos materiales pueden ser inapropiados para preadolescentes',
+      content_rating_r_description: 'Los menores de 17 años requieren el acompañamiento de un padre o tutor adulto. Contiene material para adultos. Se insta a los padres a aprender más sobre el contenido antes de llevar a sus hijos pequeños con ellos',
+      change: 'Cambiar',
+
     },
     en: {
       tittle: 'Title',
@@ -86,5 +97,15 @@ export default
       account_removed: 'Account successfully removed',
       remove_account_confirmation: 'Are you sure to remove your account?',
       cancel: 'Cancel',
+      content_rating_settings: 'Content rating settings',
+      content_rating_g_title: 'G – General Audiences',
+      content_rating_pg_title: 'PG – Parental Guidance Suggested',
+      content_rating_pg_13_title: 'PG-13 – Parents Strongly Cautioned',
+      content_rating_r_title: 'R – Restricted',
+      content_rating_g_description: 'All ages admitted. Nothing that would offend parents for viewing by children.',
+      content_rating_pg_description: 'Some material may not be suitable for children. Parents urged to give "parental guidance". May contain some material parents might not like for their young children',
+      content_rating_pg_13_description: 'Some material may be inappropriate for children under 13. Parents are urged to be cautious. Some material may be inappropriate for pre-teenagers',
+      content_rating_r_description: 'Under 17 requires accompanying parent or adult guardian. Contains some adult material. Parents are urged to learn more about the film before taking their young children with them',
+      change: 'Change',
     }
   };
