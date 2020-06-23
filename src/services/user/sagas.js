@@ -20,6 +20,7 @@ import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
 import { getUserDataError } from 'services/user/helpers';
 import { goToGifs } from 'scenes/GifSearcher/actions';
+import { resetSearch } from 'services/giphyProvider/actions';
 
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
@@ -60,6 +61,7 @@ function* logOut(localStorage) {
     type: NOTIFICATION_TYPES.INFO,
     textId: 'logged_out',
   }))
+  yield put(resetSearch());
 }
 
 function* getUserFromToken(token) {
@@ -80,6 +82,7 @@ function* doLogIn(userToken) {
       userObj: userFromToken,
       token: userToken,
     }));
+    yield put(resetSearch());
     return true;
   }
 }
@@ -123,6 +126,7 @@ function* removeAccount({ removeUserAccount }, localStorage) {
     type: NOTIFICATION_TYPES.INFO,
     textId: 'account_removed',
   }))
+  yield put(resetSearch());
 }
 
 export default function* ({ api, localStorage }) {

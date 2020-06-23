@@ -1,10 +1,12 @@
-import { call, put, takeEvery, delay, select } from 'redux-saga/effects'
-import { LOAD_MORE, SEARCH_GIFS, SEARCH_TRENDING_GIFS } from './constants';
+import { call, put, takeLatest, delay, select } from 'redux-saga/effects'
+import { LOAD_MORE, RESET_SEARCH, SEARCH_GIFS, SEARCH_TRENDING_GIFS } from './constants';
 import { startLoadingGifs, stopSearch, gifsLoaded } from './actions';
 import { selectGifData, selectIsSearching, selectSearchInfo } from './selectors';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { UI_ANIMATION_DELAY } from 'constants/constants';
+import selectSearch from 'services/search/selectSearch';
+import { SEARCH_TYPES } from 'services/search/constants';
 
 function* startSearching() {
   yield put(startLoadingGifs());
@@ -72,8 +74,41 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   }));
 }
 
+function* resetSearch({ searchTrendingGifs, searchGifs }) {
+  const search = yield select(selectSearch);
+  yield call(startSearching);
+
+  let data;
+  const timestamp = Date.now();
+
+  try {
+    switch (search.type) {
+      case SEARCH_TYPES.TRENDING:
+        data = yield call(searchTrendingGifs);
+        break;
+      case SEARCH_TYPES.SEARCH:
+        data = yield call(searchGifs, search.query);
+        break
+    }
+  } catch (e) {
+    yield put(stopSearch())
+    yield put(showNotifications({
+      type: NOTIFICATION_TYPES.ERROR,
+      textId: 'networkError',
+    }))
+
+    return;
+  }
+
+  yield put(gifsLoaded({
+    ...data,
+    timestamp,
+  }));
+}
+
 export default function* ({ api }) {
-  yield takeEvery(SEARCH_GIFS, searchGifs, api);
-  yield takeEvery(SEARCH_TRENDING_GIFS, searchTrendingGifs, api);
-  yield takeEvery(LOAD_MORE, loadMore, api );
+  yield takeLatest(SEARCH_GIFS, searchGifs, api);
+  yield takeLatest(SEARCH_TRENDING_GIFS, searchTrendingGifs, api);
+  yield takeLatest(LOAD_MORE, loadMore, api );
+  yield takeLatest(RESET_SEARCH, resetSearch, api );
 };

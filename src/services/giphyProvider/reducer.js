@@ -1,4 +1,11 @@
-import { GIFS_LOADED, GIFS_START_LOADING, SEARCH_GIFS, SEARCH_TRENDING_GIFS, STOP_SEARCH } from './constants';
+import {
+  GIFS_LOADED,
+  GIFS_START_LOADING,
+  RESET_SEARCH,
+  SEARCH_GIFS,
+  SEARCH_TRENDING_GIFS,
+  STOP_SEARCH
+} from './constants';
 
 const initialState = {
   gifs: [],
@@ -8,6 +15,7 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
+    case RESET_SEARCH:
     case SEARCH_TRENDING_GIFS:
     case SEARCH_GIFS: {
       return {
