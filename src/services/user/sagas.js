@@ -1,4 +1,5 @@
 import { takeEvery, call, select, put } from 'redux-saga/effects';
+import { omit } from 'lodash';
 import {
   CHANGE_USER_PERSONAL_DATA,
   LOG_IN_USER,
@@ -8,12 +9,14 @@ import {
   USER_LOGGED_IN
 } from 'services/user/constants';
 import jsonwebtoken, { JsonWebTokenError } from 'jsonwebtoken';
-import { selectPublicKey } from 'services/configuration/selectors';
+import { selectLanguage, selectPublicKey } from 'services/configuration/selectors';
 import {
   authorizationError,
   userLoggedIn as userLoggedInAction,
   logOut as logOutAction,
-  refreshToken as refreshTokenAction, accountRemoved,
+  refreshToken as refreshTokenAction,
+  changeUserPersonalData as changeUserPersonalDataAction,
+  accountRemoved,
 } from './actions';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
@@ -21,10 +24,20 @@ import { STORED_USER_KEY } from 'services/localStorage/constants';
 import { getUserDataError } from 'services/user/helpers';
 import { goToGifs } from 'scenes/GifSearcher/actions';
 import { resetSearch } from 'services/giphyProvider/actions';
+import { CONFIG_SET_LANGUAGUE } from 'services/configuration/constants';
+import { selectUser } from 'services/user/selectors';
+import { setLanguage } from 'services/configuration/actions';
 
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
-    const signedUser = yield call(signUpUser, user);
+    const language = yield select(selectLanguage);
+    const signedUser = yield call(
+      signUpUser,
+      {
+        ...omit(user, ['confirmPassword']),
+        language,
+      }
+    );
     if(yield call(doLogIn, signedUser)) {
       yield put(goToGifs());
       yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}));
@@ -76,8 +89,11 @@ function* getUserFromToken(token) {
 
 function* doLogIn(userToken) {
   const userFromToken = yield call(getUserFromToken, userToken);
+  const user = yield select(selectUser);
 
   if (userFromToken) {
+    if(!user)
+      yield put(setLanguage(userFromToken.language));
     yield put(userLoggedInAction({
       userObj: userFromToken,
       token: userToken,
@@ -129,6 +145,12 @@ function* removeAccount({ removeUserAccount }, localStorage) {
   yield put(resetSearch());
 }
 
+function* languageChange({ payload: language}) {
+  const user = yield select(selectUser);
+  if(user)
+    yield put(changeUserPersonalDataAction({ language }));
+}
+
 export default function* ({ api, localStorage }) {
   yield takeEvery(SIGN_UP_USER, signUpUser, api);
   yield takeEvery(LOG_IN_USER, logInUser, api);
@@ -138,4 +160,5 @@ export default function* ({ api, localStorage }) {
   yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);
   yield takeEvery(CHANGE_USER_PERSONAL_DATA, changeUserPersonalData, api);
   yield takeEvery(REMOVE_ACCOUNT, removeAccount, api, localStorage);
+  yield takeEvery(CONFIG_SET_LANGUAGUE, languageChange);
 };

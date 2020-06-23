@@ -40,8 +40,7 @@ export default function () {
   };
 
   const signUpUser = (user) => {
-    const { password, name, email } = user
-    return userTransmuter(client.post('/sign-up', { password, name, email }));
+    return userTransmuter(client.post('/sign-up', { ...user }));
   }
 
   const logInUser = userCredentials => {
