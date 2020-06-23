@@ -9,7 +9,7 @@ import { SearchProvider } from 'services/search/context';
 import { createBrowserHistory } from "history";
 import { configureStore } from 'services/store';
 import ReactModal from 'react-modal';
-import IntlProvider from 'services/intlProvider/IntlProvider';
+import IntlProvider from 'services/intl/IntlProvider';
 import { loadApp } from 'services/configuration/actions';
 
 const history = createBrowserHistory();

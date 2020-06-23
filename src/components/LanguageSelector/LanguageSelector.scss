@@ -1,0 +1,25 @@
+.components-language-selector {
+  position: relative;
+  padding: 10px;
+  min-width: 80px;
+
+  &__languages-container {
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: black;
+    box-shadow: 0 5px 12px #565656;
+    cursor: pointer;
+    display: none;
+  }
+
+  &:hover &__languages-container{
+    display: initial;
+  }
+
+  &__language-element:hover {
+    color: white;
+  }
+}

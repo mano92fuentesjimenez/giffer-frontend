@@ -27,6 +27,8 @@ export default
       user_data_validation_name_exist: 'Nombre de usuario ya existe',
       user_data_validation_email_exists: 'Correo ya existe',
       undefined_error: 'Ha ocurrido un error',
+      log_in_welcome: 'Bienvenido a Giffer',
+      log_in_welcome_description: 'Por favor llena el formulario para iniciar sesión',
       log_in_name: 'Correo o Nombre de Usuario',
       log_in_password: 'Contraseña',
       log_in_user_not_found: 'El usuario no existe',

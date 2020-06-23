@@ -4,6 +4,7 @@
   position: sticky;
   top: 0;
   box-shadow: 0 5px 12px #565656;
+  color: #ada9a9;
 
   &__top-bar {
     max-width: 1120px;
@@ -19,5 +20,6 @@
     font-family: holtwood-one-sc, Arial, serif;
     font-size: 35px;
     color: #e8e8e8;
+    flex-basis: 300px;
   }
 }
