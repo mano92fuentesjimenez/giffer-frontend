@@ -1,11 +1,14 @@
 .components-top-bar {
   background: black;
   z-index: 1000;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 5px 12px #565656;
 
   &__top-bar {
     max-width: 1120px;
     width: 100%;
-    margin: 0 auto 10px;
+    margin: 0 auto;
     padding: 5px;
     display: flex;
     align-items: center;

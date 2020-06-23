@@ -1,4 +1,5 @@
 import React  from 'react';
+import bem from 'bem-cn';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -11,7 +12,9 @@ import { PATH as GIFS_PATH } from '../constants'
 import { PATH as GIFS_VIEW_PATH } from 'scenes/GifViewer/constants'
 import useSearch from "services/search/useSearch";
 import withInfiniteLoading from "hocs/withInfiniteLoading";
-import './GifSearcher.css'
+import './GifSearcher.scss'
+
+const b = bem('scenes-gif-searcher');
 
 const chunkSize = 6;
 const GifSearcher = () => {
@@ -30,10 +33,10 @@ const GifSearcher = () => {
   return <>
     <TopBar query={query} changeQuery={changeQuery}/>
     {isSearching && gifData.length === 0 &&
-    <div className='big-loader-wrapper'>
+    <div className={b('big-loader-wrapper')()}>
       <Loader type="Rings" color='blue' height={200} width={200}/>
     </div>}
-    {gifData && <div className="container">
+    {gifData && <div className={b('gifs-container').mix("container")()}>
       {
         rowChunks.map((rowChunk, chunkIndex) => (
             <div className="row mb-4" key={chunkIndex}>
@@ -47,10 +50,10 @@ const GifSearcher = () => {
       }
     </div>}
     {isSearching && gifData.length > 0 &&
-    <div className='small-loader-wrapper'>
+    <div className={b('small-loader-wrapper')()}>
       <Loader type="Rings" color='blue' height={100} width={100}/>
     </div>}
-    {!isSearching && <div className="gif-searcher-bottom-spacing"/>}
+    {!isSearching && <div className={b('gif-searcher-bottom-spacing')()}/>}
   </>
 };
 

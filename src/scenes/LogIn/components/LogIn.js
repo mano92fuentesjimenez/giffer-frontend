@@ -68,6 +68,7 @@ const LogIn = () => {
           color="primary"
           onClick={onSubmit}
           disabled={!isValid(validationValues)}
+          className={b('button')()}
         >
           <FormattedMessage id="login"/>
         </Button>

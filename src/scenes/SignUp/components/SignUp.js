@@ -92,6 +92,7 @@ const SignUp = () => {
           color="primary"
           onClick={onSubmit}
           disabled={!isValid(validationValues)}
+          className={b('button')()}
         >
           <FormattedMessage id="signup"/>
         </Button>
