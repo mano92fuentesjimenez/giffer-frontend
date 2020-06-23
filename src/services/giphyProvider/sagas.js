@@ -89,6 +89,7 @@ function* resetSearch({ searchTrendingGifs, searchGifs }) {
       case SEARCH_TYPES.SEARCH:
         data = yield call(searchGifs, search.query);
         break
+      default: data = [];
     }
   } catch (e) {
     yield put(stopSearch())

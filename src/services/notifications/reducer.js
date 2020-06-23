@@ -1,4 +1,4 @@
-import { CLOSE_NOTIFICATIONS, NOTIFICATIONS_OPENED, OPEN_NOTIFICATIONS } from './constants';
+import { CLOSE_NOTIFICATIONS, NOTIFICATIONS_OPENED } from './constants';
 
 const initialState = {
   isOpen: false,
