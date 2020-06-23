@@ -1,14 +1,15 @@
 import { call, put, takeEvery, delay, select } from 'redux-saga/effects'
-import { LOAD_MORE, SEARCH_GIFS, SEARCH_TRENDING_GIFS, SEARCHING_DELAY } from './constants';
+import { LOAD_MORE, SEARCH_GIFS, SEARCH_TRENDING_GIFS } from './constants';
 import { startLoadingGifs, stopSearch, gifsLoaded } from './actions';
 import { selectGifData, selectIsSearching, selectSearchInfo } from './selectors';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
+import { UI_ANIMATION_DELAY } from 'constants/constants';
 
 function* startSearching() {
   yield put(startLoadingGifs());
   // just to show searching UI
-  yield delay(SEARCHING_DELAY)
+  yield delay(UI_ANIMATION_DELAY)
 }
 
 function* searchGifs({ searchGifs }, { payload: { query }}) {
