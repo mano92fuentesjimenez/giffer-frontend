@@ -8,12 +8,13 @@ import ArrowButton from 'components/ArrowButton/ArrowButton';
 import GifMetadata from 'components/GifMetadata/GifMetadata';
 import { loadMore } from 'services/giphyProvider/actions';
 import Loader from 'react-loader-spinner';
+import withContainerWidth from 'hocs/withContainerWidth';
 import './CarouselViewer.scss'
 
 const b = bem('scene-gif-viewer');
 
 const gifsToShow = 10;
-const CarouselViewer = ({ location: { search }}) => {
+const CarouselViewer = ({ location: { search }, width}) => {
 
   const dispatch = useDispatch();
   const gifs = useSelector(selectGifData);
@@ -24,21 +25,14 @@ const CarouselViewer = ({ location: { search }}) => {
   const [gifWidth, setGifWidth] = useState(0);
   const [firstGif, setFirstGif] = useState(0);
 
-  const calculateGifWidth = () => {
-    if (!containerRef.current)
-      return;
-    const {width} = containerRef.current.getBoundingClientRect();
-    setGifWidth((width - 68) / gifsToShow);
-  }
-
   useEffect(() => {
-    window.addEventListener('resize', calculateGifWidth);
     setFirstGif(Math.max(selectedGifPosition - gifsToShow / 2 - 1, firstGif));
-
-    setTimeout(calculateGifWidth, 50);
-    return () => window.removeEventListener('resize', calculateGifWidth);
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    setGifWidth((width - 68) / gifsToShow);
+  }, [width])
 
   const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
@@ -101,4 +95,4 @@ const CarouselViewer = ({ location: { search }}) => {
   )
 }
 
-export default CarouselViewer;
+export default withContainerWidth(CarouselViewer);
