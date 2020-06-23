@@ -2,6 +2,7 @@ import { AUTHORIZATION_ERROR, LOG_IN_USER, LOG_OUT, SIGN_UP_USER, USER_LOGGED_IN
 
 const initialState = {
   user: null,
+  token: null,
   authorizationError: null,
 };
 
@@ -11,6 +12,7 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         user: payload.userObj,
+        token: payload.token,
         authorizationError: null,
       }
     case SIGN_UP_USER:

@@ -1,0 +1,17 @@
+
+.scenes-user-settings-personal-data {
+  &__form-block {
+    display: flex;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  &__input {
+    flex-grow: 1;
+  }
+
+  &__submit_button {
+    margin-left: 19px !important;
+    transform: translateY(11px);
+  }
+}

@@ -21,7 +21,7 @@ export default
       sign_up_validation_email: 'Introduzca un correo válido',
       sign_up_validation_password: 'La contraseña y la contraseña de confirmación no coinciden',
       sign_up_password_length_validation: 'La contraseña debe tener mas de 6 caracteres',
-      submit: 'La contraseña y la contraseña de confirmación no coinciden',
+      submit: 'Enviar',
       notification_user_logged_in: 'Se ha logueado satisfactoriamente',
       sign_up_validation_name_exists: 'Nombre de usuario ya existe',
       sign_up_validation_email_exists: 'Correo ya existe',
@@ -33,6 +33,9 @@ export default
       log_out: 'Cerrar Sesión',
       logged_out: 'Sesión cerrada satisfactoriamente',
       settings: 'Configuraciones',
+      settings_personal_title: 'Cambiar datos personales',
+      settings_change_name: 'Cambiar Nombre',
+      changed_notification: 'Cambiado satisfactoriamente'
     },
     en: {
       tittle: 'Title',
@@ -55,6 +58,7 @@ export default
       sign_up_validation_email: 'Type a valid email address',
       sign_up_validation_password: 'Password and confirmation password do not match',
       sign_up_password_length_validation: 'The password must be more than 6 characters',
+      submit: 'Submit',
       notification_user_logged_in: 'Successfully logged in',
       sign_up_validation_name_exists: 'Name already taken',
       sign_up_validation_email_exists: 'Email already taken',
@@ -68,5 +72,9 @@ export default
       log_out: 'Log Out',
       logged_out: 'Successfully logout',
       settings: 'Settings',
+      settings_personal_title: 'Change Personal info',
+      settings_change_name: 'Change Name',
+      settings_change_email: 'Change Email',
+      changed_notification: 'Successfully changed'
     }
   };

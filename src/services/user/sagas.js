@@ -1,10 +1,22 @@
 import { takeEvery, call, select, put } from 'redux-saga/effects';
 import { PATH as GIFS_PATH } from 'scenes/GifSearcher';
 import { push } from 'connected-react-router';
-import { LOG_IN_USER, LOG_OUT, LOGIN_USER_FROM_STORAGE, SIGN_UP_USER, USER_LOGGED_IN } from 'services/user/constants';
-import jsonwebtoken from 'jsonwebtoken';
-import { selectAppLoaded, selectPublicKey } from 'services/configuration/selectors';
-import { authorizationError, userLoggedIn as userLoggedInAction } from './actions';
+import {
+  CHANGE_USER_PERSONAL_DATA,
+  LOG_IN_USER,
+  LOG_OUT,
+  LOGIN_USER_FROM_STORAGE, REFRESH_TOKEN,
+  SIGN_UP_USER,
+  USER_LOGGED_IN
+} from 'services/user/constants';
+import jsonwebtoken, { JsonWebTokenError } from 'jsonwebtoken';
+import { selectPublicKey } from 'services/configuration/selectors';
+import {
+  authorizationError,
+  userLoggedIn as userLoggedInAction,
+  logOut as logOutAction,
+  refreshToken as refreshTokenAction,
+} from './actions';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
@@ -12,7 +24,10 @@ import { STORED_USER_KEY } from 'services/localStorage/constants';
 function* signUpUser({ signUpUser }, { payload: user }) {
   try {
     const signedUser = yield call(signUpUser, user);
-    yield call(doLogIn, signedUser);
+    if(yield call(doLogIn, signedUser)) {
+      yield put(push(GIFS_PATH))
+      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}))
+    }
   }
   catch (e) {
     let errorMsg = 'undefined_error';
@@ -37,7 +52,10 @@ function* signUpUser({ signUpUser }, { payload: user }) {
 function* logInUser( { logInUser }, { payload: userCredentials }) {
   try {
     const user = yield call(logInUser, userCredentials)
-    yield call(doLogIn, user);
+    if(yield call(doLogIn, user)) {
+      yield put(push(GIFS_PATH))
+      yield put(showNotifications({type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in'}))
+    }
   }
   catch (e) {
     let errorMsg = 'undefined_error';
@@ -58,28 +76,26 @@ function* logOut(localStorage) {
   }))
 }
 
-function* doLogIn(user) {
+function* getUserFromToken(token) {
   const publicKey = yield select(selectPublicKey);
   try {
-    const userObj = yield call(jsonwebtoken.verify, user, publicKey, {algorithms: ['RS512']});
-    yield put(userLoggedInAction({
-      userObj,
-      token: user,
-    }));
-  }
-  catch (e) {
-    if(e instanceof JsonWebTokenError)
+    return yield call(jsonwebtoken.verify, token, publicKey, {algorithms: ['RS512']})
+  } catch (e) {
+    if (e instanceof JsonWebTokenError)
       yield put(logOutAction());
   }
-
 }
 
-function* userLoggedIn() {
-  const appLoaded = yield select(selectAppLoaded);
+function* doLogIn(userToken) {
+  const userFromToken = yield call(getUserFromToken, userToken);
 
-  yield put(push(GIFS_PATH))
-  if(appLoaded)
-    yield put(showNotifications({ type: NOTIFICATION_TYPES.INFO, textId: 'notification_user_logged_in' }))
+  if (userFromToken) {
+    yield put(userLoggedInAction({
+      userObj: userFromToken,
+      token: userToken,
+    }));
+    return true;
+  }
 }
 
 function* logInUserFromStorage(localStorage) {
@@ -93,11 +109,25 @@ function* storeSignedUser(localStorage, action) {
   yield call(localStorage.setItem, STORED_USER_KEY, action.payload.token);
 }
 
+function* changeUserPersonalData({ changeUserPersonalData }, { payload: personalData}) {
+  const user = yield call(changeUserPersonalData, personalData);
+  yield put(refreshTokenAction(user));
+  yield put(showNotifications({
+    type: NOTIFICATION_TYPES.INFO,
+    textId: 'changed_notification',
+  }))
+}
+
+function* refreshToken({ payload: userToken }) {
+  yield call(doLogIn, userToken)
+}
+
 export default function* ({ api, localStorage }) {
   yield takeEvery(SIGN_UP_USER, signUpUser, api);
   yield takeEvery(LOG_IN_USER, logInUser, api);
   yield takeEvery(LOG_OUT, logOut, localStorage);
-  yield takeEvery(USER_LOGGED_IN, userLoggedIn, api);
   yield takeEvery(USER_LOGGED_IN, storeSignedUser, localStorage);
+  yield takeEvery(REFRESH_TOKEN, refreshToken);
   yield takeEvery(LOGIN_USER_FROM_STORAGE, logInUserFromStorage, localStorage);
+  yield takeEvery(CHANGE_USER_PERSONAL_DATA, changeUserPersonalData, api);
 };

@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { checkValidValues } from 'helpers/validations';
 
-const usePersonalData = (checkConfirmPassword) => {
+const getValue = (values, field) => {
+  if(values){
+    return values[field] ? values[field] : '';
+  }
+  return '';
+}
+
+const usePersonalData = (checkConfirmPassword, userData) => {
   const [values, setValues] = useState({
-    name: '',
-    email: '',
+    name: getValue(userData, 'name'),
+    email: getValue(userData, 'email'),
     password: '',
     confirmPassword: '',
   })

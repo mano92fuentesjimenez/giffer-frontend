@@ -1,5 +1,13 @@
 
 .scenes-user-settings {
-  width: 200px;
-  height: 200px;
+  width: 500px;
+
+  padding: 25px;
+
+  &__title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+  }
+
 }

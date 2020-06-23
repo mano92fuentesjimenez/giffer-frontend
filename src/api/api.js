@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { PAGINATION_LIMIT } from "constants/constants";
 import { giffsTransmuter, keyTransmuter, userTransmuter } from 'api/transmuters';
+import getStore from 'services/store';
+import { selectToken, selectUser } from 'services/user/selectors';
 
 export default function () {
   const client = axios.create({
@@ -15,6 +17,14 @@ export default function () {
       }
     }
   };
+
+  const getBody = (params, auth) => {
+    const token = selectToken(getStore().getState());
+    return {
+      ...params,
+      ...(auth ? { token } : {}),
+    }
+  }
 
   const searchGifs = (text, offset = 0, limit = PAGINATION_LIMIT) => {
     return giffsTransmuter(
@@ -41,11 +51,16 @@ export default function () {
     return keyTransmuter(client.get('getPublicKey'));
   }
 
+  const changeUserPersonalData = personalData => {
+    return userTransmuter(client.post(`/user/update`, getBody(personalData, true)));
+  }
+
   return {
     searchGifs,
     searchTrendingGifs,
     signUpUser,
     getPublicKey,
     logInUser,
+    changeUserPersonalData,
   }
 }

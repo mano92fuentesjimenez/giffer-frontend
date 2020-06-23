@@ -7,7 +7,9 @@ import api from "api/api";
 import locationHistoryMiddleware from "./middlewares/location-history-middleware";
 import localStorage from 'services/localStorage';
 
-const configureStore = (history) => {
+let store;
+
+export const configureStore = (history) => {
   const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true })
     : compose;
@@ -19,7 +21,7 @@ const configureStore = (history) => {
     ...reducers,
     router: connectRouter(history),
   });
-  const store = createStore(enhancedReducers, enhancer);
+  store = createStore(enhancedReducers, enhancer);
   sagas.forEach(saga => {
     sagaMiddleware.run(saga, {
       localStorage: localStorage(),
@@ -29,4 +31,5 @@ const configureStore = (history) => {
   return store;
 }
 
-export default configureStore;
+const getStore = () => store;
+export default getStore;
