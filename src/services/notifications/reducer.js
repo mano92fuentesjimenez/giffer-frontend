@@ -1,4 +1,4 @@
-import { CLOSE_NOTIFICATIONS, OPEN_NOTIFICATIONS } from './constants';
+import { CLOSE_NOTIFICATIONS, NOTIFICATIONS_OPENED, OPEN_NOTIFICATIONS } from './constants';
 
 const initialState = {
   isOpen: false,
@@ -8,7 +8,7 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
-    case OPEN_NOTIFICATIONS:
+    case NOTIFICATIONS_OPENED:
       return {
         ...state,
         isOpen: true,
