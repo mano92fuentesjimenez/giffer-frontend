@@ -39,6 +39,8 @@ export default
       change_password: 'Cambiar Contraseña',
       remove_account: 'Eliminar cuenta',
       account_removed: 'Cuenta eliminada satisfactoriamente',
+      remove_account_confirmation: 'Estás seguro de eliminar tu cuenta?',
+      cancel: 'Cancelar',
     },
     en: {
       tittle: 'Title',
@@ -82,5 +84,7 @@ export default
       change_password: 'Change Password',
       remove_account: 'Remove Account',
       account_removed: 'Account successfully removed',
+      remove_account_confirmation: 'Are you sure to remove your account?',
+      cancel: 'Cancel',
     }
   };

@@ -24,5 +24,20 @@
   &__button {
     text-transform: none !important;
     font-weight: 600 !important;
+
+    &_remove {
+      background-color: #e0265a !important;
+      &:hover {
+        background-color: #d40000 !important;
+      }
+    }
+
+    &_confirmation {
+      margin-left: 35px !important;
+    }
+
+    &_cancel {
+      width: 135px;
+    }
   }
 }
