@@ -11,7 +11,6 @@ import './EmptySearch.scss'
 const b = bem('scenes-gif-searcher-empty-search');
 const EmptySearch = () => {
   const [search] = useSearch();
-  console.log(search);
   const isFavorites = search.type === SEARCH_TYPES.FAVORITES;
 
   const icon = isFavorites ? emptyFavoritesIcon : emptyIcon
