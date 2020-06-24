@@ -7,7 +7,7 @@ export const giffsTransmuter = async (req, text) => {
     data: data.map(gif => ({
       id: gif.id,
       smallUrl: gif.images.fixed_width_downsampled.url,
-      largeUrl: gif.images.fixed_width_downsampled.url,
+      largeUrl: gif.images.original.webp,
       isFavorite: gif.isFavorite,
       metaData: {
         title: gif.title,
@@ -24,11 +24,9 @@ export const giffsTransmuter = async (req, text) => {
 };
 
 export const userTransmuter = async (req) => {
-  const data = getData(await req);
-  return data;
+  return getData(await req);
 }
 
 export const keyTransmuter = async (req) => {
-  const data = getData(await req);
-  return data;
+  return getData(await req);
 }
