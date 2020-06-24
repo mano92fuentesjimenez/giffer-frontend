@@ -54,6 +54,7 @@ export default
       content_rating_pg_13_description: 'Algunos materiales pueden ser inapropiados para niños menores de 13 años. Se insta a los padres a ser cautelosos. Algunos materiales pueden ser inapropiados para preadolescentes',
       content_rating_r_description: 'Los menores de 17 años requieren el acompañamiento de un padre o tutor adulto. Contiene material para adultos. Se insta a los padres a aprender más sobre el contenido antes de llevar a sus hijos pequeños con ellos',
       change: 'Cambiar',
+      empty_search_message: 'Lo sentimos, su búsquedo no ha producido ningun resultado.'
 
     },
     en: {
@@ -111,5 +112,6 @@ export default
       content_rating_pg_13_description: 'Some material may be inappropriate for children under 13. Parents are urged to be cautious. Some material may be inappropriate for pre-teenagers',
       content_rating_r_description: 'Under 17 requires accompanying parent or adult guardian. Contains some adult material. Parents are urged to learn more about the film before taking their young children with them',
       change: 'Change',
+      empty_search_message: 'Sorry, your search has not produced any results.'
     }
   };

@@ -13,6 +13,7 @@ import { PATH as GIFS_VIEW_PATH } from 'scenes/GifViewer/constants'
 import useSearch from "services/search/useSearch";
 import withInfiniteLoading from "hocs/withInfiniteLoading";
 import './GifSearcher.scss'
+import EmptySearch from 'scenes/GifSearcher/components/EmptySearch';
 
 const b = bem('scenes-gif-searcher');
 
@@ -22,39 +23,51 @@ const GifSearcher = () => {
   const isSearching = useSelector(selectIsSearching);
   const dispatch = useDispatch();
   const [search, changeSearch] = useSearch(GIFS_PATH);
-  const { query } = search;
+  const {query} = search;
   const rowChunks = chunk(gifData, chunkSize);
 
-  const changeQuery = (newSearchText) => changeSearch({ query: newSearchText })
+  const changeQuery = (newSearchText) => changeSearch({query: newSearchText})
   const onGifClick = (position) => () => dispatch(
-    push({ pathname: GIFS_VIEW_PATH, search: qs.stringify({ position, ...search }) })
+    push({pathname: GIFS_VIEW_PATH, search: qs.stringify({position, ...search})})
   );
 
-  return <>
-    <TopBar query={query} changeQuery={changeQuery}/>
-    {isSearching && gifData.length === 0 &&
-    <div className={b('big-loader-wrapper')()}>
-      <Loader type="Rings" color='blue' height={200} width={200}/>
-    </div>}
-    {gifData && <div className={b('gifs-container').mix("container")()}>
+  return (
+    <>
+      <TopBar query={query} changeQuery={changeQuery}/>
       {
-        rowChunks.map((rowChunk, chunkIndex) => (
-            <div className="row mb-4" key={chunkIndex}>
-              {rowChunk.map((gif, rowIndex) => (
-                <div className="col-md-2" key={gif.id}>
-                  <Gif gif={gif} onClick={onGifClick((chunkIndex)* chunkSize + rowIndex)}/>
-                </div>))}
-            </div>
-          )
-        )
+        isSearching && gifData.length === 0 &&
+        <div className={b('big-loader-wrapper')()}>
+          <Loader type="Rings" color='blue' height={200} width={200}/>
+        </div>
       }
-    </div>}
-    {isSearching && gifData.length > 0 &&
-    <div className={b('small-loader-wrapper')()}>
-      <Loader type="Rings" color='blue' height={100} width={100}/>
-    </div>}
-    {!isSearching && <div className={b('gif-searcher-bottom-spacing')()}/>}
-  </>
+      {
+        gifData &&
+        <div className={b('gifs-container').mix("container")()}>
+          {
+            rowChunks.map((rowChunk, chunkIndex) => (
+                <div className="row mb-4" key={chunkIndex}>
+                  {rowChunk.map((gif, rowIndex) => (
+                    <div className="col-md-2" key={gif.id}>
+                      <Gif gif={gif} onClick={onGifClick((chunkIndex) * chunkSize + rowIndex)}/>
+                    </div>))}
+                </div>
+              )
+            )
+          }
+        </div>
+      }
+      {
+        !isSearching && gifData.length === 0 && <EmptySearch />
+      }
+      {
+        isSearching && gifData.length > 0 &&
+        <div className={b('small-loader-wrapper')()}>
+          <Loader type="Rings" color='blue' height={100} width={100}/>
+        </div>
+      }
+      {!isSearching && <div className={b('gif-searcher-bottom-spacing')()}/>}
+    </>
+  )
 };
 
 export default withInfiniteLoading(GifSearcher);

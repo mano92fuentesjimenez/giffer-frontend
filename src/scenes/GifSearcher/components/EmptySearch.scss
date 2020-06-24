@@ -1,0 +1,19 @@
+.scenes-gif-searcher-empty-search {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__image {
+    width: 200px;
+    height: 200px;
+    padding-bottom: initial;
+  }
+
+  &__error-description {
+    font-size: 22px;
+    margin-top: 30px;
+    font-weight: 500;
+    color: black;
+  }
+}
