@@ -27,7 +27,7 @@ const withInfiniteLoading = (Component) => {
       if (
         document.documentElement.clientHeight + document.documentElement.scrollTop
         === document.documentElement.offsetHeight
-        && searchInfo.pagination.total_count > gifs.length
+        && searchInfo.pagination && searchInfo.pagination.total_count > gifs.length
       ) {
         loadMoreAction();
       }
