@@ -1,9 +1,10 @@
 import {
+  FAVORITE_GIF_TOGGLED,
   GIFS_LOADED,
   GIFS_START_LOADING,
   RESET_SEARCH,
   SEARCH_GIFS,
-  SEARCH_TRENDING_GIFS,
+  SEARCH_TRENDING_GIFS, TOGGLE_FAVORITE_GIF,
   STOP_SEARCH
 } from './constants';
 
@@ -11,6 +12,7 @@ const initialState = {
   gifs: [],
   searching: false,
   searchInfo: {},
+  togglingFavoriteGif: [],
 };
 
 export default function(state = initialState, { type, payload }) {
@@ -46,7 +48,35 @@ export default function(state = initialState, { type, payload }) {
         }
       }
     case STOP_SEARCH:
-      return initialState;
+      return {
+        ...state,
+        gifs: [],
+        searching: false,
+        searchInfo: {},
+      };
+    case TOGGLE_FAVORITE_GIF:
+      return {
+        ...state,
+        togglingFavoriteGif: [
+          ...state.togglingFavoriteGif,
+          payload,
+        ]
+      };
+    case FAVORITE_GIF_TOGGLED:
+      return {
+        ...state,
+        gifs: state.gifs.map( gif => {
+          if(gif.id === payload)
+            return {
+              ...gif,
+              isFavorite: !gif.isFavorite,
+            }
+          return gif;
+        }),
+        togglingFavoriteGif: state.togglingFavoriteGif.filter(
+          favoriteGif => favoriteGif !== payload
+        ),
+      }
     default:
       return state;
   }

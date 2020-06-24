@@ -42,7 +42,7 @@ const GifSearcher = () => {
             <div className="row mb-4" key={chunkIndex}>
               {rowChunk.map((gif, rowIndex) => (
                 <div className="col-md-2" key={gif.id}>
-                  <Gif gifUrl={gif.smallUrl} onClick={onGifClick((chunkIndex)* chunkSize + rowIndex)}/>
+                  <Gif gif={gif} onClick={onGifClick((chunkIndex)* chunkSize + rowIndex)}/>
                 </div>))}
             </div>
           )

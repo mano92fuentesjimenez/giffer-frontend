@@ -6,8 +6,9 @@ export const giffsTransmuter = async (req, text) => {
   return {
     data: data.map(gif => ({
       id: gif.id,
-      smallUrl: gif.images.fixed_width_downsampled.url ,
+      smallUrl: gif.images.fixed_width_downsampled.url,
       largeUrl: gif.images.fixed_width_downsampled.url,
+      isFavorite: gif.isFavorite,
       metaData: {
         title: gif.title,
         creationTime: gif.create_datetime,

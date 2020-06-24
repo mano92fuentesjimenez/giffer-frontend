@@ -5,3 +5,5 @@ export const SEARCH_TRENDING_GIFS = 'giphy_provider.search_trending_gifS'
 export const LOAD_MORE = 'giphy_provider.load_more';
 export const STOP_SEARCH = 'giphy_provider.stop_search';
 export const RESET_SEARCH = 'giphy_provider.reset_search';
+export const TOGGLE_FAVORITE_GIF = 'giphy_provider.toggle_favorite_gif';
+export const FAVORITE_GIF_TOGGLED = 'giphy_provider.favorite_gif_toggled';

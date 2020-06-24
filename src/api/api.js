@@ -60,6 +60,10 @@ export default function () {
     return client.post(`/user/remove`, getBody({}, true));
   }
 
+  const toggleFavoriteGif = (gifId) => {
+    return client.post(`/user/toggleFavoriteGif`, getBody({ gifId }, true));
+  }
+
   return {
     searchGifs,
     searchTrendingGifs,
@@ -67,6 +71,7 @@ export default function () {
     getPublicKey,
     logInUser,
     changeUserPersonalData,
-    removeUserAccount
+    removeUserAccount,
+    toggleFavoriteGif
   }
 }

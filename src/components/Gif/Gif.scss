@@ -1,7 +1,51 @@
+@keyframes favorites-icon-rotate {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.3;
+  }
+
+  60% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
 .components-gif {
+  position: relative;
+
   &_selected,
   &_gif-hover:hover {
     cursor: pointer;
     box-shadow: 0 1px 5px 6px #848484;
+  }
+
+  &__star-container {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+
+    &_isToggling {
+      animation: favorites-icon-rotate 3s linear infinite;
+    }
+
+    &_isFavorite {
+      opacity: 1 !important;
+    }
+  }
+
+  &:hover &__star-container {
+    opacity: 0.6;
   }
 }

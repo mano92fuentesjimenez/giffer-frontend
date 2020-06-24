@@ -1,6 +1,6 @@
-import { call, put, takeLatest, delay, select } from 'redux-saga/effects'
-import { LOAD_MORE, RESET_SEARCH, SEARCH_GIFS, SEARCH_TRENDING_GIFS } from './constants';
-import { startLoadingGifs, stopSearch, gifsLoaded } from './actions';
+import { call, put, takeLatest, takeEvery, delay, select } from 'redux-saga/effects'
+import { LOAD_MORE, RESET_SEARCH, SEARCH_GIFS, SEARCH_TRENDING_GIFS, TOGGLE_FAVORITE_GIF } from './constants';
+import { startLoadingGifs, stopSearch, gifsLoaded, favoriteGifToggled } from './actions';
 import { selectGifData, selectIsSearching, selectSearchInfo } from './selectors';
 import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
@@ -107,9 +107,16 @@ function* resetSearch({ searchTrendingGifs, searchGifs }) {
   }));
 }
 
+function* togleFavoriteGif({ toggleFavoriteGif }, { payload }) {
+  yield delay(UI_ANIMATION_DELAY);
+  yield call(toggleFavoriteGif, payload);
+  yield put(favoriteGifToggled(payload));
+}
+
 export default function* ({ api }) {
   yield takeLatest(SEARCH_GIFS, searchGifs, api);
   yield takeLatest(SEARCH_TRENDING_GIFS, searchTrendingGifs, api);
   yield takeLatest(LOAD_MORE, loadMore, api );
   yield takeLatest(RESET_SEARCH, resetSearch, api );
+  yield takeEvery(TOGGLE_FAVORITE_GIF, togleFavoriteGif, api );
 };

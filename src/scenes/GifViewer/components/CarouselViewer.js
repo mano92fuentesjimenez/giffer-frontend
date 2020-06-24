@@ -10,6 +10,7 @@ import { loadMore } from 'services/giphyProvider/actions';
 import Loader from 'react-loader-spinner';
 import withContainerWidth from 'hocs/withContainerWidth';
 import './CarouselViewer.scss'
+import { GIFF_SIZES } from 'constants/constants';
 
 const b = bem('scene-gif-viewer');
 
@@ -48,7 +49,7 @@ const CarouselViewer = ({ location: { search }, width}) => {
     <div className={b()} ref={containerRef}>
       <div className={b('main-container')()}>
         <div className={b('main-gif-container')()}>
-          <Gif gifUrl={selectedGif.largeUrl}/>
+          <Gif gif={selectedGif} size={GIFF_SIZES.LARGE}/>
         </div>
         <div className={b('metadata-container')()}>
           <GifMetadata gif={selectedGif}/>
@@ -72,7 +73,7 @@ const CarouselViewer = ({ location: { search }, width}) => {
                 style={{width: gifWidth}}
               >
                 <Gif
-                  gifUrl={gif.smallUrl}
+                  gif={gif}
                   onClick={() => onGifSelected(index)}
                   selected={index === selectedGifPosition}
                 />
