@@ -1,3 +1,5 @@
+Frontend Project for Giffer
+
 GIFFER is a new web application that allows the user to have access to a wide variety of giffs. Powered by Giphy api offers search features like searching by a string or just seeing latest trending gifs
 
 Most of the code is implemented using functional components unless a class component was really necessary to use.
@@ -44,5 +46,5 @@ Project structure:
  
 For used technologies: Please see package.json 
 
-For run, just do ```yarn start```
+For run, just do ```yarn``` and later ```yarn start```
  
