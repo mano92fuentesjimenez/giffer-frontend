@@ -94,8 +94,8 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   yield put(gifsLoaded({
     ...data,
     data: [
-      ...data.data,
       ...actualGifData,
+      ...data.data,
     ]
   }));
 }
