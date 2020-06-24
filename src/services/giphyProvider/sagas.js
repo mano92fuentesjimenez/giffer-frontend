@@ -78,8 +78,12 @@ function* resetSearch({ searchTrendingGifs, searchGifs }) {
   const search = yield select(selectSearch);
   yield call(startSearching);
 
+  if(!search.type)
+    return ;
+
   let data;
   const timestamp = Date.now();
+  console.log(search);
 
   try {
     switch (search.type) {

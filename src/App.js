@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { selectAppLoaded } from 'services/configuration/selectors';
 import Loader from 'react-loader-spinner';
 import bem from 'bem-cn'
+import withAuthenticatedRedirection from 'hocs/withAuthenticatedRedirection';
 import './App.scss';
 
 const b = bem('app-root');
@@ -27,9 +28,9 @@ function App() {
           <ModalService>
             <Switch>
               <Route exact path={GIFS_VIEW_PATH} component={CarouselViewer}/>
-              <Route exact path={LOGIN_PATH} component={LogIn}/>
-              <Route exact path={SIGNUP_PATH} component={SignUp}/>
-              <Route exact path={USER_SETTINGS_PATH} component={UserSettings}/>
+              <Route exact path={LOGIN_PATH} component={withAuthenticatedRedirection(false)(LogIn)}/>
+              <Route exact path={SIGNUP_PATH} component={withAuthenticatedRedirection(false)(SignUp)}/>
+              <Route exact path={USER_SETTINGS_PATH} component={withAuthenticatedRedirection(true)(UserSettings)}/>
             </Switch>
           </ModalService>
           <Switch>

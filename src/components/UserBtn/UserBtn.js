@@ -31,7 +31,7 @@ const UserBtn = () => {
   useEffect(() => {
     window.addEventListener('click', onWindowClick);
     return () => window.removeEventListener('click', onWindowClick);
-  })
+  }, [])
 
   const onLoginClick = () => dispatch(push({ pathname: LOGIN_PATH, search: getStringFromSearch(search) }));
   const onSignUpClick = () => dispatch(push({ pathname: SIGNUP_PATH, search: getStringFromSearch(search) }));
