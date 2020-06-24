@@ -11,6 +11,7 @@ Current Features:
  * Fully responsive from Iphone 5s to 4k screens
  * URL as source of truth for search filters
  * User logging and user configurations
+ * User account removal
  * Change user data and user credentials
  * Persist user logging by using localStorage api
  * Search gifs with a string
