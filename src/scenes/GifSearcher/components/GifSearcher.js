@@ -3,7 +3,7 @@ import bem from 'bem-cn';
 import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { selectGifData, selectIsSearching } from "services/giphyProvider/selectors";
+import { selectGifData, selectIsSearching } from 'services/giphyProvider/selectors';
 import { chunk } from 'lodash';
 import Gif from "components/Gif/Gif";
 import Loader from 'react-loader-spinner';
