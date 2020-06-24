@@ -48,4 +48,11 @@
     color: red;
     font-size: 14px;
   }
+
+  @media (min-width: 0px) and (max-width: 780px) {
+    &__input input,
+    &__input label {
+        font-size: 14px !important;
+    }
+  }
 }

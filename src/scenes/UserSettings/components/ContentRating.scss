@@ -1,21 +1,16 @@
 .scenes-user-settings-content-rating {
   flex-grow: 1;
   max-width: 500px;
+  margin-top: 25px;
 
   &__settings-container {
-    height: 80%;
+    height: 300px;
     display: flex;
     justify-content: space-between;
   }
 
   &__description {
     flex-grow: 1;
-  }
-
-  &__title {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
   }
 
   &__description-title {
@@ -34,5 +29,16 @@
   &__button {
     text-transform: none !important;
     font-weight: 600 !important;
+  }
+
+  &__submit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  &__slider {
+    position: relative;
+    left: -14px;
   }
 }
