@@ -35,6 +35,12 @@ export default function () {
     );
   };
 
+  const searchFavorites = () => {
+    return giffsTransmuter(
+      client.get('gifs/searchFavorite', getParams({ }, true)),
+    );
+  };
+
   const searchTrendingGifs = (offset = 0, limit = PAGINATION_LIMIT) => {
     return giffsTransmuter(client.get('gifs/trending', getParams({ offset, limit }, true)));
   };
@@ -61,7 +67,7 @@ export default function () {
   }
 
   const toggleFavoriteGif = (gifId) => {
-    return client.post(`/user/toggleFavoriteGif`, getBody({ gifId }, true));
+    return client.post(`/gifs/toggleFavoriteGif`, getBody({ gifId }, true));
   }
 
   return {
@@ -72,6 +78,7 @@ export default function () {
     logInUser,
     changeUserPersonalData,
     removeUserAccount,
-    toggleFavoriteGif
+    toggleFavoriteGif,
+    searchFavorites,
   }
 }

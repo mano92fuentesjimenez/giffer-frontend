@@ -5,4 +5,5 @@ export const wasTypeTrendingLastPath = ({ meta: { previousLocation: { search } }
   return getSearchFromString(search).type === SEARCH_TYPES.TRENDING;
 }
 
-export const wasLastRouteTheSame = ({ meta: { previousLocation: { location } }}, pathname) => location === pathname;
+export const wasLastRouteTheSame =
+  ({ meta: { previousLocation: { pathname: previousPath } }}, pathname) => previousPath === pathname;

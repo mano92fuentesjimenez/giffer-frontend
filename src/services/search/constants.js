@@ -1,4 +1,5 @@
 export const SEARCH_TYPES = {
-  SEARCH: "search",
+  SEARCH: 'search',
   TRENDING: 'trending',
+  FAVORITES: 'favorites',
 }

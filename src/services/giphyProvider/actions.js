@@ -7,11 +7,12 @@ import {
   STOP_SEARCH,
   RESET_SEARCH,
   TOGGLE_FAVORITE_GIF,
-  FAVORITE_GIF_TOGGLED,
+  FAVORITE_GIF_TOGGLED, SEARCH_FAVORITES,
 } from './constants';
 
 export const searchGifs = (search) => ({ type: SEARCH_GIFS, payload: search });
 export const searchTrendingGifs = () => ({ type: SEARCH_TRENDING_GIFS });
+export const searchFavoriteGifs = () => ({ type: SEARCH_FAVORITES });
 export const startLoadingGifs = () => ({ type: GIFS_START_LOADING });
 export const gifsLoaded = (data) => ({ type: GIFS_LOADED, payload: data });
 export const loadMore = () => ({ type: LOAD_MORE });

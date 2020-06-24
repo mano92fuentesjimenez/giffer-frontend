@@ -1,5 +1,12 @@
 import { call, put, takeLatest, takeEvery, delay, select } from 'redux-saga/effects'
-import { LOAD_MORE, RESET_SEARCH, SEARCH_GIFS, SEARCH_TRENDING_GIFS, TOGGLE_FAVORITE_GIF } from './constants';
+import {
+  LOAD_MORE,
+  RESET_SEARCH,
+  SEARCH_FAVORITES,
+  SEARCH_GIFS,
+  SEARCH_TRENDING_GIFS,
+  TOGGLE_FAVORITE_GIF
+} from './constants';
 import { startLoadingGifs, stopSearch, gifsLoaded, favoriteGifToggled } from './actions';
 import { selectGifData, selectIsSearching, selectSearchInfo } from './selectors';
 import { showNotifications } from 'services/notifications/actions';
@@ -52,6 +59,25 @@ function* searchTrendingGifs({ searchTrendingGifs }) {
   }
 }
 
+function* searchFavoriteGifs({ searchFavorites }) {
+  yield call(startSearching);
+  try {
+    const timestamp = Date.now();
+    const data = yield call(searchFavorites);
+
+    yield put(gifsLoaded({
+      ...data,
+      timestamp,
+    }));
+  } catch (e) {
+    yield put(stopSearch())
+    yield put(showNotifications({
+      type: NOTIFICATION_TYPES.ERROR,
+      textId: 'networkError',
+    }))
+  }
+}
+
 function* loadMore({ searchTrendingGifs, searchGifs }) {
 
   const isSearching = yield select(selectIsSearching);
@@ -74,7 +100,7 @@ function* loadMore({ searchTrendingGifs, searchGifs }) {
   }));
 }
 
-function* resetSearch({ searchTrendingGifs, searchGifs }) {
+function* resetSearch({ searchTrendingGifs, searchGifs, searchFavorites }) {
   const search = yield select(selectSearch);
   yield call(startSearching);
 
@@ -83,7 +109,6 @@ function* resetSearch({ searchTrendingGifs, searchGifs }) {
 
   let data;
   const timestamp = Date.now();
-  console.log(search);
 
   try {
     switch (search.type) {
@@ -93,6 +118,9 @@ function* resetSearch({ searchTrendingGifs, searchGifs }) {
       case SEARCH_TYPES.SEARCH:
         data = yield call(searchGifs, search.query);
         break
+      case SEARCH_TYPES.FAVORITES:
+        data = yield call(searchFavorites);
+        break;
       default: data = [];
     }
   } catch (e) {
@@ -120,6 +148,7 @@ function* togleFavoriteGif({ toggleFavoriteGif }, { payload }) {
 export default function* ({ api }) {
   yield takeLatest(SEARCH_GIFS, searchGifs, api);
   yield takeLatest(SEARCH_TRENDING_GIFS, searchTrendingGifs, api);
+  yield takeLatest(SEARCH_FAVORITES, searchFavoriteGifs, api);
   yield takeLatest(LOAD_MORE, loadMore, api );
   yield takeLatest(RESET_SEARCH, resetSearch, api );
   yield takeEvery(TOGGLE_FAVORITE_GIF, togleFavoriteGif, api );
