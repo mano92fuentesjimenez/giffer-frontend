@@ -1,39 +1,51 @@
-import React,{ useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import getSearch from 'helpers/getSearch';
 import { selectGifData, selectIsSearching } from 'services/giphyProvider/selectors';
-import bem from 'bem-cn';
-import Gif from 'components/Gif/Gif';
-import ArrowButton from 'components/ArrowButton/ArrowButton';
-import GifMetadata from 'components/GifMetadata/GifMetadata';
 import { loadMore } from 'services/giphyProvider/actions';
-import Loader from 'react-loader-spinner';
 import withContainerWidth from 'hocs/withContainerWidth';
+import Responsive, { largeScreeMediaQUery, midScreenMediaQuery, mobileMediaQuery } from 'services/Responsive';
+import CarouselViewerLarge from 'scenes/GifViewer/components/CarouselViewer.large';
+import CarouselViewerMobile from 'scenes/GifViewer/components/CarouselViewer.mobile';
+import { useMediaQuery } from 'react-responsive';
 import './CarouselViewer.scss'
-import { GIFF_SIZES } from 'constants/constants';
 
-const b = bem('scene-gif-viewer');
+const ResponsiveComponent = Responsive({
+  LargeDesktop: CarouselViewerLarge,
+  MidDesktop: CarouselViewerLarge,
+  Mobile: CarouselViewerMobile,
+})
 
-const gifsToShow = 10;
+let gifsToShow = 10;
 const CarouselViewer = ({ location: { search }, width}) => {
+
+  const isMidScreen = useMediaQuery(midScreenMediaQuery);
+  const isLargeScreen = useMediaQuery(largeScreeMediaQUery);
+  const isMobileScreen = useMediaQuery(mobileMediaQuery);
+
+  if(isMidScreen)
+    gifsToShow = 5;
+  if(isLargeScreen)
+    gifsToShow = 10;
+  if(isMobileScreen)
+    gifsToShow = 1;
 
   const dispatch = useDispatch();
   const gifs = useSelector(selectGifData);
   const isLoading = useSelector(selectIsSearching);
   const searchObj = getSearch(search);
   const [selectedGifPosition, setSelectedGifPosition] = useState(+searchObj.position);
-  const containerRef = useRef(null);
   const [gifWidth, setGifWidth] = useState(0);
   const [firstGif, setFirstGif] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setFirstGif(Math.max(selectedGifPosition - gifsToShow / 2 - 1, firstGif));
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setGifWidth((width - 68) / gifsToShow);
-  }, [width])
+  }, [width]);
 
   const onGifSelected = (gifPosition) => setSelectedGifPosition(gifPosition);
   const onGoToPreviousGifs = () => setFirstGif(Math.max(firstGif - gifsToShow, 0));
@@ -44,55 +56,20 @@ const CarouselViewer = ({ location: { search }, width}) => {
     setFirstGif(Math.min(firstGif + gifsToShow, gifs.length - gifsToShow));
   }
 
-  const selectedGif = gifs[selectedGifPosition];
+  const selectedGif = gifs[gifsToShow === 1 ? firstGif : selectedGifPosition];
+  const props = {
+    selectedGif,
+    firstGif,
+    gifs,
+    onGoToPreviousGifs,
+    gifWidth,
+    onGifSelected,
+    selectedGifPosition,
+    isLoading,
+    onGoToNextGifs,
+  }
   return (
-    <div className={b()} ref={containerRef}>
-      <div className={b('main-container')()}>
-        <div className={b('main-gif-container')()}>
-          <Gif gif={selectedGif} size={GIFF_SIZES.LARGE}/>
-        </div>
-        <div className={b('metadata-container')()}>
-          <GifMetadata gif={selectedGif}/>
-        </div>
-      </div>
-      <div className={b('carousel-holder')()}>
-        <ArrowButton
-          orientation={'left'}
-          disabled={firstGif === 0}
-          onClick={onGoToPreviousGifs}
-        />
-        <div className={b('carousel-container')()}>
-          <div
-            className={b('carousel')()}
-            style={{transform: `translate(-${firstGif * gifWidth}px)`}}
-          >
-            {gifs.map((gif, index) =>
-              <div
-                className={b('gif-container')()}
-                key={gif.id}
-                style={{width: gifWidth}}
-              >
-                <Gif
-                  gif={gif}
-                  onClick={() => onGifSelected(index)}
-                  selected={index === selectedGifPosition}
-                />
-              </div>
-            )}
-          </div>
-        </div>
-        <ArrowButton
-          className={isLoading ? 'invisible' : ''}
-          onClick={onGoToNextGifs}
-        />
-        {
-          isLoading &&
-          <div className={b('loader-container')()}>
-            <Loader type="Rings" color='blue' height={80} width={80}/>
-          </div>
-        }
-      </div>
-    </div>
+    <ResponsiveComponent {...props}/>
   )
 }
 

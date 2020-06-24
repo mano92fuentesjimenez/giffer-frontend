@@ -1,13 +1,15 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive'
 
-export const RESPONSIVE_QUERY = '(max-width: 992px)';
+export const mobileMediaQuery = { query: '(max-width: 780px)'};
+export const midScreenMediaQuery = { query: '(min-width: 780px ) and (max-width: 1120px)'};
+export const largeScreeMediaQUery = { query: '(min-width: 1120px)' };
 
 /* This is assuming only two breakpoints. It can become more sophisticated */
 export default ({ Mobile, MidDesktop, LargeDesktop }) => props => {
-  const isMobile = useMediaQuery({ query: '(max-width: 780px)'});
-  const isMidScreen = useMediaQuery({ query: '(min-width: 780px ) and (max-width: 1120px)'});
-  const isLargeScreen = useMediaQuery({ query: '(min-width: 1120px)' });
+  const isMobile = useMediaQuery(mobileMediaQuery);
+  const isMidScreen = useMediaQuery(midScreenMediaQuery);
+  const isLargeScreen = useMediaQuery(largeScreeMediaQUery);
 
   if(isMobile) return <Mobile {...props}/>;
   if(isMidScreen) return <MidDesktop {...props}/>;

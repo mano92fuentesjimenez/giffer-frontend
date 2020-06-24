@@ -1,18 +1,13 @@
 
 .scene-gif-viewer {
-
-  @media (min-width: 1650px)  {
-    width: 1600px;
-    position: relative;
-  }
-
+  width: 1600px;
+  padding: 40px 20px;
 
   &__main-container {
-    margin: 64px 0;
-    width: 900px;
+    margin: 0 40px 64px;
     height: 500px;
     display: flex;
-    transform: translate(51%);
+    justify-content: center;
   }
 
   &__main-gif-container {
@@ -27,7 +22,6 @@
   &__carousel-holder {
     display: flex;
     align-items: center;
-    margin: 0 20px 28px;
   }
 
   &__carousel-container {
@@ -49,11 +43,45 @@
 
   &__loader-container {
     position: absolute;
-    right: -48px;
+    right: -15px;
   }
 
-  &__close-btn {
-    position: absolute;
-    right: 10px;
+  @media (min-width: 1050px) and (max-width: 1600px)  {
+    width: 1000px;
+
+    &__main-gif-container {
+      width: 375px;
+    }
+
+    &__main-container {
+      height: 400px;
+      margin: 0 40px 40px;
+    }
+
+    &__metadata-container {
+      width: 400px;
+    }
+  }
+
+  @media (min-width: 780px) and (max-width: 1050px) {
+    width: 700px;
+
+    &__main-gif-container {
+      width: 290px;
+    }
+
+    &__main-container {
+      height: 300px;
+      margin: 0 40px 28px;
+    }
+
+    &__metadata-container {
+      width: 350px;
+    }
+  }
+
+  @media (min-width: 0px) and (max-width: 780px) {
+    width: 320px;
+    height: 500px;
   }
 }
