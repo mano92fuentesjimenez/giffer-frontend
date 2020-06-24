@@ -5,13 +5,14 @@ import { selectUser } from 'services/user/selectors';
 import { PATH as LOGIN_PATH} from 'scenes/LogIn';
 import { PATH as SIGNUP_PATH} from 'scenes/SignUp';
 import { PATH as USER_SETTINGS_PATH } from 'scenes/UserSettings/constants';
-import selectSearch from 'services/search/selectSearch';
 import { getStringFromSearch } from 'services/search/helpers';
 import { logOut } from 'services/user/actions';
 import Responsive from 'services/Responsive';
 import UserBtnLarge from 'components/UserBtn/UserBtn.large';
 import UserBtnMobile from 'components/UserBtn/UserBtn.mobile';
 import './UserBtn.scss';
+import { SEARCH_TYPES } from 'services/search/constants';
+import useSearch from 'services/search/useSearch';
 
 const ResponsiveComponent = Responsive({
   Mobile: UserBtnMobile,
@@ -23,7 +24,8 @@ const UserBtn = () => {
 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const search = useSelector(selectSearch);
+  const [search, updateSearch] = useSearch();
+  const isFilteringByFavorites = search.type === SEARCH_TYPES.FAVORITES;
 
   const [showMenu, setShowMenu] = useState(false);
   const containerRef = useRef(null)
@@ -43,6 +45,7 @@ const UserBtn = () => {
   const onLogoutClick = () => dispatch(logOut())
   const onUserSettingsClick = () => dispatch(push({ pathname: USER_SETTINGS_PATH, search: getStringFromSearch(search) }));
   const onToggleShowMenu = () => setShowMenu(!showMenu);
+  const onFilterClick = () => updateSearch({ type: isFilteringByFavorites ? SEARCH_TYPES.SEARCH : SEARCH_TYPES.FAVORITES })
 
   const props = {
     onLoginClick,
@@ -52,6 +55,8 @@ const UserBtn = () => {
     showMenu,
     onLogoutClick,
     onUserSettingsClick,
+    onFilterClick,
+    isFilteringByFavorites,
   }
 
   return (

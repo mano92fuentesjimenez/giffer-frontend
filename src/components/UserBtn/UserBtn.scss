@@ -62,10 +62,16 @@
     margin: 5px 0;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   &__settings-icon {
     width: 38px;
+  }
+
+  &__favorite-container {
+    width: 12px;
+    margin-left: 4px;
   }
 }
 

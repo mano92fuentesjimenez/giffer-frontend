@@ -56,6 +56,7 @@ export default
       change: 'Cambiar',
       empty_search_message: 'Lo sentimos, su búsquedo no ha producido ningun resultado.',
       empty_favorites_message: 'Aún no tienes ningún gif en favoritos. Para añadir un gif a favorito haz click en la estrella del gif que quieres añadir.',
+      favorites: 'Favoritos',
 
     },
     en: {
@@ -115,5 +116,6 @@ export default
       change: 'Change',
       empty_search_message: 'Sorry, your search has not produced any results.',
       empty_favorites_message: 'You have no favorite gif yet. To add a favorite gif, click on the star of the gif you want to add.',
+      favorites: 'Favorites',
     }
   };
