@@ -26,4 +26,14 @@
   }
 }
 
+@media (max-width: 500px) {
+  .components-search-input input {
+    width: 200px;
+  }
+}
+@media (max-width: 420px) {
+  .components-search-input input {
+    width: 150px;
+  }
+}
 

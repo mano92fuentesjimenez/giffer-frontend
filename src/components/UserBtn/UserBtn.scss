@@ -1,11 +1,10 @@
 .components-user-btn {
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   color: #aea9a9;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 280px;
   justify-content: flex-end;
 
   &__login,
@@ -50,6 +49,13 @@
     border-bottom-right-radius: 8px;
     box-shadow: 0 4px 7px 1px #848484;
     font-size: 14px;
+
+    @media (max-width: 780px) {
+      & {
+        right: -2px;
+        left: unset;
+      }
+    }
   }
 
   &__menu-element {
@@ -58,4 +64,9 @@
     justify-content: center;
   }
 
+  &__settings-icon {
+    width: 38px;
+  }
 }
+
+
