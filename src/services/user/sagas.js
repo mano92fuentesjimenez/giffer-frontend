@@ -134,10 +134,10 @@ function* refreshToken({ payload: userToken }) {
 }
 
 function* removeAccount({ removeUserAccount }, localStorage) {
+  yield put(goToGifs());
   yield call(removeUserAccount);
   yield call(localStorage.removeItem, STORED_USER_KEY);
   yield put(accountRemoved());
-  yield put(goToGifs());
   yield put(showNotifications({
     type: NOTIFICATION_TYPES.INFO,
     textId: 'account_removed',
