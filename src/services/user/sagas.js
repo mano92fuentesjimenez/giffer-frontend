@@ -22,7 +22,7 @@ import { showNotifications } from 'services/notifications/actions';
 import { NOTIFICATION_TYPES } from 'services/notifications/constants';
 import { STORED_USER_KEY } from 'services/localStorage/constants';
 import { getUserDataError } from 'services/user/helpers';
-import { goToGifs } from 'scenes/GifSearcher/actions';
+import { goToGifs, goToTrendings } from 'scenes/GifSearcher/actions';
 import { resetSearch } from 'services/giphyProvider/actions';
 import { CONFIG_SET_LANGUAGUE } from 'services/configuration/constants';
 import { selectUser } from 'services/user/selectors';
@@ -74,7 +74,7 @@ function* logOut(localStorage) {
     type: NOTIFICATION_TYPES.INFO,
     textId: 'logged_out',
   }))
-  yield put(resetSearch());
+  yield put(goToTrendings());
 }
 
 function* getUserFromToken(token) {
