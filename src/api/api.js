@@ -6,7 +6,7 @@ import { selectToken } from 'services/user/selectors';
 
 export default function () {
   const client = axios.create({
-    baseURL: `http://localhost:8000`,
+    baseURL: `http://185.254.204.214:8000`,
     headers: { 'Content-Type': 'application/json' },
   });
 
