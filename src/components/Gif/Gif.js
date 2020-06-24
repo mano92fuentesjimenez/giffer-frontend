@@ -2,14 +2,13 @@ import React from 'react';
 import bem from 'bem-cn';
 import Image from 'components/Image/Image';
 import { GIFF_SIZES } from 'constants/constants';
-import './Gif.scss';
-
 import favoriteIcon from 'images/favorite-icon.png';
 import nonFavoriteIcon from 'images/non-favorite-icon.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavoriteGif } from 'services/giphyProvider/actions';
 import { selectGifToggingFavorite } from 'services/giphyProvider/selectors';
 import { selectUser } from 'services/user/selectors';
+import './Gif.scss';
 
 const b = bem('components-gif');
 const Gif = ({ gif, onClick, selected, size = GIFF_SIZES.SMALL }) => {

@@ -5,7 +5,7 @@ import {
   RESET_SEARCH,
   SEARCH_GIFS,
   SEARCH_TRENDING_GIFS, TOGGLE_FAVORITE_GIF,
-  STOP_SEARCH
+  STOP_SEARCH, SEARCH_FAVORITES
 } from './constants';
 
 const initialState = {
@@ -19,6 +19,7 @@ export default function(state = initialState, { type, payload }) {
   switch (type) {
     case RESET_SEARCH:
     case SEARCH_TRENDING_GIFS:
+    case SEARCH_FAVORITES:
     case SEARCH_GIFS: {
       return {
         ...state,

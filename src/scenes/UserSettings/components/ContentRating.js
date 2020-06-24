@@ -73,28 +73,15 @@ const ContentRating = () => {
 
   return (
     <div className={b()}>
-      <div className={b('title')()}>
-        <FormattedMessage id='content_rating_settings' />
-      </div>
       <div className={b('settings-container')()}>
         <div>
           <div className={b('description-container')()}>
             <div className={b('description-title')()}> <FormattedMessage id={ratingsValues[rating].title}/></div>
             <div className={b('description')()}> <FormattedMessage id={ratingsValues[rating].description}/></div>
           </div>
-          <div className="d-flex justify-content-end">
-            <Button
-              variant="outlined"
-              color="primary"
-              className={b('button')()}
-              disabled={userRatingValue === sliderValue}
-              onClick={onSubmitClick}
-            >
-              <FormattedMessage id="change" />
-            </Button>
-          </div>
         </div>
         <Slider
+          className={b('slider')()}
           orientation="vertical"
           marks={marks}
           min={1}
@@ -103,6 +90,17 @@ const ContentRating = () => {
           onChange={onSliderChange}
           value={sliderValue}
         />
+      </div>
+      <div className={b('submit-button-container')()}>
+        <Button
+          variant="outlined"
+          color="primary"
+          className={b('button')()}
+          disabled={userRatingValue === sliderValue}
+          onClick={onSubmitClick}
+        >
+          <FormattedMessage id="change" />
+        </Button>
       </div>
     </div>
   )

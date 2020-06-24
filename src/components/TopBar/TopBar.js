@@ -4,19 +4,28 @@ import bem from 'bem-cn'
 import UserBtn from 'components/UserBtn/UserBtn';
 import './TopBar.scss';
 import LanguageSelector from 'components/LanguageSelector/LanguageSelector';
+import FavoritesFilter from 'components/FavoritesFilter/FavoritesFilter';
+import Responsive from 'services/Responsive';
 
 const b = bem('components-top-bar');
-const TopBar = ({ query, changeQuery }) => (
+const TopBar = isBig => ({ query, changeQuery }) => (
   <div className={b()}>
-    <div className={b('top-bar')()}>
+    <div className={b('top-bar').mix('container')()}>
       <span className={b('app-title')()}>Giffer</span>
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center flex-grow-1 justify-content-center">
         <SearchInput query={query} changeQuery={changeQuery}/>
-        <LanguageSelector/>
+        {isBig && <FavoritesFilter/>}
+        {isBig && <LanguageSelector/>}
       </div>
       <UserBtn />
     </div>
   </div>
 );
 
-export default TopBar;
+const ResponsiveTopBar = Responsive({
+  Mobile: TopBar(false),
+  MidDesktop: TopBar(true),
+  LargeDesktop: TopBar(true),
+})
+
+export default ResponsiveTopBar;

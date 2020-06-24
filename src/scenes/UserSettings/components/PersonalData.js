@@ -33,7 +33,7 @@ const PersonalData = () => {
     <div className={b()}>
       {
         removingAccount &&
-        <div >
+        <div>
           <div className="d-flex justify-content-center mb-3">
             <FormattedMessage id="remove_account_confirmation"/>
           </div>
@@ -41,15 +41,15 @@ const PersonalData = () => {
             <Button
               variant="outlined"
               color="primary"
-              className={b('button')({ cancel: true })()}
+              className={b('button')({cancel: true})()}
               onClick={toggleRemovingAccount}
             >
-              <FormattedMessage id="cancel" />
+              <FormattedMessage id="cancel"/>
             </Button>
             <Button
               variant="contained"
               color="secondary"
-              className={b('button')({ remove: true, confirmation: true })()}
+              className={b('button')({remove: true, confirmation: true})()}
               onClick={onRemoveAccount}
               startIcon={<DeleteIcon/>}
               size="small"
@@ -61,24 +61,10 @@ const PersonalData = () => {
       }
       {!removingAccount &&
       <>
-        <div className={b('title')()}>
-          <FormattedMessage id={'settings_personal_title'}/>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={b('button')({remove: true})()}
-            onClick={toggleRemovingAccount}
-            startIcon={<DeleteIcon/>}
-            size="small"
-          >
-            <FormattedMessage id="remove_account"/>
-          </Button>
-        </div>
-
         {
           authorizationError &&
           <div className={b('authorization-error')()}>
-            <FormattedMessage id={authorizationError} />
+            <FormattedMessage id={authorizationError}/>
           </div>
         }
         <div className={b('form-block')()}>
@@ -153,15 +139,26 @@ const PersonalData = () => {
             helperText={validationValues.confirmPassword}
           />
         </div>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={onSubmit('password')}
-          className={b('button')()}
-          disabled={validationValues.password !== '' && validationValues.confirmPassword !== ''}
-        >
-          <FormattedMessage id="change_password"/>
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={onSubmit('password')}
+            className={b('button')()}
+            disabled={validationValues.password !== '' && validationValues.confirmPassword !== ''}
+          >
+            <FormattedMessage id="change_password"/>
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={b('button')({remove: true})()}
+            onClick={toggleRemovingAccount}
+            startIcon={<DeleteIcon/>}
+            size="small"
+          >
+            <FormattedMessage id="remove_account"/>
+          </Button></div>
       </>
       }
     </div>

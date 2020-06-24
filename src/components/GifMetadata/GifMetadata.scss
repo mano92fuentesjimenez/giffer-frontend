@@ -10,5 +10,11 @@
     flex-shrink: 0;
   }
 
+  @media (min-width: 0px) and (max-width: 780px) {
+    font-size: 14px;
 
+    &__field {
+      width: 115px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from 'services/user/selectors';
 import { goToGifs } from 'scenes/GifSearcher/actions';
@@ -10,9 +10,10 @@ const withAuthenticatedRedirection = checkIsAuthenticated => Component => (props
   const user = useSelector(selectUser);
 
   //hack to not throw in some hooks
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(checkAuth(checkIsAuthenticated, user))
       dispatch(goToGifs())
+    // eslint-disable-next-line
   }, [])
   if(checkAuth(checkIsAuthenticated, user))
     return null;
