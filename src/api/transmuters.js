@@ -7,7 +7,7 @@ export const giffsTransmuter = async (req, text) => {
     data: data.map(gif => ({
       id: gif.id,
       smallUrl: gif.images.fixed_width_downsampled.url,
-      largeUrl: gif.images.original.webp,
+      largeUrl: gif.images.downsized.url,
       isFavorite: gif.isFavorite,
       metaData: {
         title: gif.title,
