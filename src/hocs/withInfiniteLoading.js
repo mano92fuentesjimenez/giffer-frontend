@@ -23,11 +23,14 @@ const withInfiniteLoading = (Component) => {
     }
 
     onScrollHandler() {
-      const {searchInfo, gifs, loadMoreAction} = this.props;
+      const { searchInfo, gifs, loadMoreAction } = this.props;
+      const { offsetHeight } = document.documentElement;
+      const { innerHeight, pageYOffset } = window;
+
       if (
-        document.documentElement.clientHeight + document.documentElement.scrollTop
-        === document.documentElement.offsetHeight
-        && searchInfo.pagination && searchInfo.pagination.total_count > gifs.length
+        (innerHeight + pageYOffset) >= offsetHeight - 2
+        && searchInfo.pagination
+        && searchInfo.pagination.total_count > gifs.length
       ) {
         loadMoreAction();
       }
