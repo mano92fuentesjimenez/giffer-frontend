@@ -39,7 +39,7 @@ const CarouselViewer = ({ location: { search }, width}) => {
   const [firstGif, setFirstGif] = useState(0);
 
   useLayoutEffect(() => {
-    setFirstGif(Math.max(Math.ceil(selectedGifPosition - gifsToShow / 2 - 1), firstGif));
+    setFirstGif(Math.max(Math.ceil(selectedGifPosition - gifsToShow / 2), firstGif));
     // eslint-disable-next-line
   }, []);
 
